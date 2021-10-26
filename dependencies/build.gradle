@@ -227,7 +227,8 @@ project.ext {
             [configuration: "implementation", dependency: libraries.analytics],
 //            [configuration: "implementation", dependency: libraries.directboot],
             [configuration: "implementation", dependency: libraries.androidanimations],
-            [configuration: "implementation", dependency: libraries.androidanimationseasing]
+            [configuration: "implementation", dependency: libraries.androidanimationseasing],
+            [configuration: "implementation", dependency: libraries.kotlinreflect]
     ]
 
     // dependencies which need to be added in app module only in conjunction with commonDependencies
@@ -252,7 +253,8 @@ project.ext {
             [configuration: "implementation", dependency: libraries.timber],
             [configuration: "implementation", dependency: libraries.facebook],
             [configuration: "implementation", dependency: libraries.rxAndroid],
-            [configuration: "implementation", dependency: libraries.rxJava]
+            [configuration: "implementation", dependency: libraries.rxJava],
+            [configuration: "implementation", dependency: libraries.kotlinreflect]
     ]
 
     // dependencies which need to be added in app module only in conjunction with commonDependencies
@@ -270,7 +272,8 @@ project.ext {
             [configuration: "implementation", dependency: libraries.androidanimationseasing],
             [configuration: "implementation", dependency: libraries.expandableLayout],
             [configuration: "implementation", dependency: libraries.rangeSeekbar],
-            [configuration: "implementation", dependency: libraries.swipeViewActions]
+            [configuration: "implementation", dependency: libraries.swipeViewActions],
+            [configuration: "implementation", dependency: libraries.kotlinreflect]
     ]
 
     // dependencies which need to be added in yapcore module only in conjunction with commonDependencies
@@ -335,7 +338,8 @@ project.ext {
             [configuration: "api", dependency: libraries.easyPermission],
             [configuration: "api", dependency: libraries.lotieAnimation],
             [configuration: "implementation", dependency: libraries.material],
-            [configuration: "implementation", dependency: libraries.sdp]
+            [configuration: "implementation", dependency: libraries.sdp],
+            [configuration: "implementation", dependency: libraries.kotlinreflect]
     ]
     // dependencies which need to be added in translation module only in conjunction with commonDependencies
     sendmoneyDependencies = [
@@ -343,7 +347,8 @@ project.ext {
             [configuration: "implementation", dependency: project(modules.yapcore)],
             [configuration: "implementation", dependency: project(modules.translation)],
             [configuration: "implementation", dependency: project(modules.networking)],
-            [configuration: "implementation", dependency: libraries.swipeViewActions]
+            [configuration: "implementation", dependency: libraries.swipeViewActions],
+            [configuration: "implementation", dependency: libraries.kotlinreflect]
 
     ]
 
@@ -362,7 +367,8 @@ project.ext {
             [configuration: "implementation", dependency: libraries.coroutineAndroid],
             [configuration: "implementation", dependency: libraries.FirebaseCrashlyticsSdk],
             [configuration: "implementation", dependency: libraries.FirebaseCreshlytics],
-            [configuration: "implementation", dependency: libraries.phoneLib]
+            [configuration: "implementation", dependency: libraries.phoneLib],
+            [configuration: "implementation", dependency: libraries.kotlinreflect]
 
     ]
     // dependencies which need to be added in Wallet module only/-
