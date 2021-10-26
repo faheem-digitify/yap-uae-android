@@ -2,9 +2,9 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'androidx.navigation.safeargs.kotlin'
-apply {
-    from "../yapuae/uploadLibrary.gradle"
-}
+//apply {
+//    from "../yapuae/uploadLibrary.gradle"
+//}
 project.ext {
     compileSdkVersion = 29
     minSdkVersion = 23
