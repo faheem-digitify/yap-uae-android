@@ -7,7 +7,6 @@ import co.yap.networking.transactions.TransactionsRepository
 import co.yap.yapcore.BaseViewModel
 import co.yap.yapcore.SingleClickEvent
 import co.yap.yapcore.helpers.extentions.sizeInMb
-import id.zelory.compressor.Compressor
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -58,11 +57,11 @@ class PreviewTransactionReceiptViewModel(application: Application) :
     ) {
         launch {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-                Compressor.compress(context, actualFile) {
-                    saveTransactionReceipt(actualFile) {
-                        success()
-                    }
-                }
+//                Compressor.compress(context, actualFile) {
+//                    saveTransactionReceipt(actualFile) {
+//                        success()
+//                    }
+//                }
             } else {
                 saveTransactionReceipt(actualFile) {
                     success()

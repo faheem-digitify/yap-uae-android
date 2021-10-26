@@ -31,7 +31,6 @@ project.ext {
             yapcore         : ':yapcore',
             kyc             : ':identityscanner_v2',
             sendmoney       : ':sendmoney',
-            security        : ':security',
             qrcodereaderview: ':qrcodereaderview',
             wallet          : ':wallet'
     ]
@@ -205,7 +204,6 @@ project.ext {
             [configuration: "implementation", dependency: libraries.adjustReferrer],
             [configuration: "implementation", dependency: libraries.expand],
             [configuration: "implementation", dependency: libraries.pdfViewer],
-            [configuration: "implementation", dependency: libraries.security],
             [configuration: "implementation", dependency: libraries.facebook],
             [configuration: "implementation", dependency: libraries.playservicesAuth],
             [configuration: "implementation", dependency: libraries.playservicesAuthPhone],
@@ -216,7 +214,6 @@ project.ext {
     // dependencies which need to be added in app module only in conjunction with commonDependencies
     appDependencies = [
             [configuration: "implementation", dependency: project(modules.translation)],
-            [configuration: "implementation", dependency: project(modules.security)],
             [configuration: "implementation", dependency: project(modules.yapcore)],
             [configuration: "implementation", dependency: project(modules.yap)],
             [configuration: "implementation", dependency: project(modules.household)],

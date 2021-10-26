@@ -16,7 +16,6 @@ import co.yap.widgets.bottomsheet.BottomSheetItem
 import co.yap.yapcore.enums.PhotoSelectionType
 import co.yap.yapcore.helpers.extentions.sizeInMb
 import co.yap.yapcore.managers.SessionManager
-import id.zelory.compressor.Compressor
 import java.io.File
 import java.util.*
 
@@ -56,11 +55,11 @@ class SelectDocumentViewModel(application: Application) :
 
         launch {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-                Compressor.compress(context, file) {
-                    upload(file, documentType, contentType = contentType) { isUploadSuccessfully ->
-                        success(isUploadSuccessfully)
-                    }
-                }
+//                Compressor.compress(context, file) {
+//                    upload(file, documentType, contentType = contentType) { isUploadSuccessfully ->
+//                        success(isUploadSuccessfully)
+//                    }
+//                }
             } else {
                 upload(file, documentType, contentType = contentType) { isUploadSuccessfully ->
                     success(isUploadSuccessfully)

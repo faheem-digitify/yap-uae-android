@@ -31,7 +31,6 @@ import co.yap.yapcore.leanplum.trackEvent
 import co.yap.yapcore.leanplum.trackEventWithAttributes
 import co.yap.yapcore.managers.SessionManager
 import com.bumptech.glide.Glide
-import id.zelory.compressor.Compressor
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -101,9 +100,9 @@ class ProfileSettingsViewModel(application: Application) :
     override fun requestUploadProfilePicture(actualFile: File) {
         launch {
             if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-                Compressor.compress(context, actualFile) {
-                    upload(actualFile)
-                }
+//                Compressor.compress(context, actualFile) {
+//                    upload(actualFile)
+//                }
             } else {
                 upload(actualFile)
             }

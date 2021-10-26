@@ -25,7 +25,6 @@ import com.digitify.identityscanner.camera.CameraListener
 import com.digitify.identityscanner.camera.CameraOptions
 import com.digitify.identityscanner.camera.PictureResult
 import com.digitify.identityscanner.utils.ImageUtils
-import id.zelory.compressor.overWrite
 import java.io.File
 
 
@@ -178,7 +177,7 @@ class AdditionalInfoScanDocumentFragment :
     private fun reWriteImage(filename: File, croppedBmp: Bitmap) {
         var file: File? = null
         Task.runSafely({
-            file = overWrite(filename, croppedBmp, quality = 90)
+//            file = overWrite(filename, croppedBmp, quality = 90)
 
         }, {
 //            activity?.runOnUiThread(Runnable {
