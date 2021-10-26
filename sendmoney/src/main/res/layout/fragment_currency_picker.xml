@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.sendmoney.currencyPicker.viewmodel.CurrencyPickerViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:paddingStart="@dimen/margin_normal"
+        android:paddingTop="@dimen/_24sdp"
+        android:paddingEnd="@dimen/margin_normal">
+
+        <co.yap.widgets.searchwidget.CoreSearchBar
+            android:id="@+id/svBeneficiary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppSearchView"
+            android:visibility="@{viewModel.state.currencyDialogChecker ? View.VISIBLE :View.INVISIBLE}"
+            app:cancelTextVisibility="@{true}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <co.yap.widgets.MultiStateView
+            android:id="@+id/multiStateView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:emptyViewText="@{@string/common_display_text_no_results}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/svBeneficiary"
+            app:msv_emptyView="@layout/layout_beneficiaries_no_results"
+            app:msv_errorView="@layout/layout_beneficiaries_no_results"
+            app:msv_viewState="content">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCurrencies"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:paddingHorizontal="@dimen/margin_extra_small"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:recycleViewAdapter="@{viewModel.currencyAdapter}"
+                tools:listitem="@layout/item_currency_country" />
+        </co.yap.widgets.MultiStateView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

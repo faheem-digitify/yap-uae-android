@@ -1,0 +1,12 @@
+dependencies {
+    //implementation fileTree(dir: 'libs', include: ['*.jar'])
+    api files('libs/SamsungPaySDK_v2.14.00.jar')
+
+    //Wallet Dependencies
+    project.walletDependencies.each {
+        add(it.configuration, it.dependency)
+    }
+    // https://mvnrepository.com/artifact/com.jayway.jsonpath/json-path
+    implementation group: 'com.jayway.jsonpath', name: 'json-path', version: '2.4.0'
+
+}

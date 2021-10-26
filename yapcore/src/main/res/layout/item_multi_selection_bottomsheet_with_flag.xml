@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.widgets.bottomsheet.CoreBottomSheetItemViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@{viewModel.itemBottomSheet.isSelected ? @color/colorLightGreyWithOpacity : @color/white}"
+        android:onClick="@{(v) -> viewModel.onViewClicked(v)}">
+
+        <co.yap.widgets.CoreCircularImageView
+            android:id="@+id/flag_img"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:src="@{viewModel.itemBottomSheet.sheetImage}"
+            tools:visibility="visible" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/textView"
+            style="@style/ARegular2Grey"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal_large"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingTop="@dimen/margin_small"
+            android:paddingEnd="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_small"
+            android:text="@{viewModel.itemBottomSheet.subTitle}"
+            android:textColor="?attr/colorPrimaryDarkAttr"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/ivSelectionTag"
+            app:layout_constraintStart_toEndOf="@+id/flag_img"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="nacdssdsfdsfsdfdsfsfdfsdfsdfdsfsdfdsfdsfdsfdsfdsfdsme"
+            tools:textColor="@color/colorPrimary" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivSelectionTag"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:src="@{viewModel.itemBottomSheet.isSelected? @drawable/ic_rounded_tick:@drawable/ic_round_empty }"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@drawable/ic_rounded_tick" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

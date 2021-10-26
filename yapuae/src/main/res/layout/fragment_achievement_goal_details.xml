@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.more.yapforyou.achievementdetail.AchievementGoalDetailViewModel" />
+
+        <import type="co.yap.translation.Strings" />
+
+        <import type="android.view.View" />
+
+        <import type="co.yap.widgets.CoreButton.ButtonSize" />
+
+        <variable
+            name="yapForYouAction"
+            type="co.yap.yapcore.enums.YAPForYouGoalAction" />
+
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                style="@style/Title3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium_large"
+                android:layout_marginTop="@dimen/margin_medium_large"
+                android:layout_marginEnd="@dimen/margin_medium_large"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:text="@{viewModel.parentViewModel.selectedAchievement.title}"
+                tools:text="YAP Store" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_marginTop="@dimen/margin_large"
+                android:id="@+id/animationView"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                app:lottie_autoPlay="true"
+                android:layout_marginStart="@dimen/margin_large"
+                android:layout_marginEnd="@dimen/margin_large"
+                app:completedMedia="@{viewModel.parentViewModel.selectedAchievementGoal.completed? viewModel.parentViewModel.selectedAchievementGoal.completedMedia :null}"
+                app:lottie_loop="false"
+                app:media="@{viewModel.parentViewModel.selectedAchievementGoal.media}" />
+
+
+            <co.yap.widgets.CoreCircularImageView
+                android:id="@+id/ivProfilePic"
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="@dimen/_110sdp"
+                android:contentDescription="@string/app_name"
+                android:visibility="@{viewModel.parentViewModel.selectedAchievementGoal.completedMedia == null? View.GONE : View.VISIBLE}"
+                app:layout_constraintBottom_toTopOf="@+id/tvSubTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                app:layout_constraintVertical_bias="0.561"
+                app:urlMedia="@{viewModel.parentViewModel.selectedAchievementGoal.completedMedia}" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animationViewFull"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_200sdp"
+                android:visibility="@{viewModel.parentViewModel.selectedAchievementGoal.completed? View.VISIBLE:View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_fileName="success_lottie.json"
+                app:lottie_loop="false" />
+
+            <View
+                android:id="@+id/tvFreezeAnimationView"
+                style="@style/Regular"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@drawable/freeze_unfreeze_gradient_animation"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/animationView"
+                app:layout_constraintVertical_bias="1.0" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSubTitle"
+                style="@style/Regular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium_large"
+                android:layout_marginEnd="@dimen/margin_medium_large"
+                android:gravity="center"
+                android:layout_marginTop="@dimen/margin_small"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/animationView"
+                app:text="@{viewModel.parentViewModel.selectedAchievementGoal.title}"
+                tools:text="Get YAP Young" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDescription"
+                style="@style/SmallGrey"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_extra_large"
+                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_extra_large"
+                android:gravity="center"
+                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSubTitle"
+                app:layout_constraintBottom_toTopOf="@+id/btnAction"
+                android:layout_marginBottom="@dimen/margin_extra_large"
+                app:text="@{viewModel.parentViewModel.selectedAchievementGoal.completed?Strings.screen_yfy_get_started_success_description :viewModel.parentViewModel.selectedAchievementGoal.description}"
+                tools:text="@string/screen_yfy_set_multi_currency_account_description" />
+
+            <co.yap.widgets.CoreButton
+                android:id="@+id/btnAction"
+                style="@style/FragmentsBtnStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="@{(v) -> viewModel.handlePressOnButton(v.id)}"
+                app:isDone="@{viewModel.parentViewModel.selectedAchievementGoal.completed}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:visibility="visible"
+                app:layout_constraintVertical_bias="1.0"
+                android:layout_marginBottom="@dimen/margin_extra_large"
+                app:yapForYouAction="@{viewModel.parentViewModel.selectedAchievementGoal.action}"
+                tools:text="Get YAP Young now" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

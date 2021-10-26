@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.addionalinfo.viewmodels.AdditionalInfoStartViewModel" />
+
+        <import type="co.yap.translation.Strings" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleX="1.2"
+            android:src="@drawable/bg_bubbles"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            style="@style/ATitle3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal_large"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_normal_large"
+            android:gravity="center"
+            android:text="@{viewModel.state.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ivBg"
+            tools:text="Hey Nada," />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSubTitle"
+            style="@style/RegularGrey"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_normal_large"
+            android:layout_marginEnd="@dimen/margin_normal_large"
+            android:gravity="center"
+            android:text="@{viewModel.state.subTitle}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvTitle"
+            tools:text="We need additional information to be able to proceed with your application to get your YAP account activated" />
+
+
+        <co.yap.widgets.CoreButton
+            android:id="@+id/btnNext"
+            style="@style/FragmentsBtnStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal"
+            android:minWidth="@dimen/_180sdp"
+            android:onClick="@{viewModel::onToolBarClick}"
+            app:btn_enable="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/tvDoItLater"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintVertical_bias="0.75"
+            app:text="@{Strings.common_button_continue}"
+            tools:text="@string/screen_add_beneficiary_button_next" />
+
+
+        <TextView
+            android:id="@+id/tvDoItLater"
+            style="@style/Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_normal_large"
+            android:onClick="@{viewModel::onToolBarClick}"
+            android:textColor="?attr/colorPrimaryAttr"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:text="@{Strings.screen_additional_info_label_text_do_it_later}"
+            tools:text="@string/screen_additional_info_label_text_do_it_later" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="planBenefitsItemViewModel"
+            type="co.yap.modules.dashboard.store.cardplans.viewmodels.PlanBenefitsItemViewModel" />
+
+        <import type="co.yap.yapuae.R" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_normal_large"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/ARegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableStart="@drawable/ic_checked_icon"
+            android:drawablePadding="@dimen/margin_medium_large"
+            android:gravity="center_vertical"
+            android:maxLines="2"
+            android:paddingBottom="@{planBenefitsItemViewModel.item.last ? @dimen/margin_btn_side_xxl : @dimen/margin_zero_dp}"
+            android:text="@{planBenefitsItemViewModel.item.benefit.toString()}"
+            android:textColor="@color/card_gradient_bottom_color"
+            android:textSize="@dimen/_13sdp"
+            tools:text="sjjdskd" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

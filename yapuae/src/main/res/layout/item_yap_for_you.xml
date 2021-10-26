@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.more.yapforyou.itemviewmodels.YAPForYouItemViewModel" />
+
+        <import type="co.yap.translation.Strings" />
+
+        <import type="android.view.View" />
+
+        <import type="android.graphics.Color" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_6sdp"
+        android:background="@drawable/cornor_edges_gery"
+        android:padding="@dimen/margin_medium">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgIcon"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_centerInParent="true"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            tools:tint="#00B9AE"
+            android:alpha="@{viewModel.achievement.isCompleted ? 1f : 0.25f }"
+            android:tint="@{viewModel.achievement.tintColor}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_y4y_badge" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgIconInner"
+            android:layout_width="@dimen/_24sdp"
+            android:layout_height="@dimen/_24sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            app:srcCompat="@{viewModel.achievement.achievementStatusIcon}"
+            app:layout_constraintEnd_toEndOf="@+id/imgIcon"
+            app:layout_constraintStart_toStartOf="@+id/imgIcon"
+            app:layout_constraintTop_toTopOf="@+id/imgIcon"
+            app:layout_constraintBottom_toBottomOf="@+id/imgIcon"
+            tools:src="@drawable/ic_yap_it"
+            android:tint="@color/white" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/ASmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_small"
+            android:gravity="center"
+            app:text="@{viewModel.achievement.title}"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@+id/imgIcon"
+            tools:text="android:asdasdas" />
+
+        <TextView
+            android:id="@+id/tvLocked"
+            style="@style/AMicroGrey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            app:text="@{Strings.screen_yfy_text_locked}"
+            tools:visibility="gone"
+            android:visibility="@{viewModel.achievement.locked? View.VISIBLE : View.GONE}"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+        <TextView
+            android:id="@+id/tvPercentage"
+            style="@style/AMicroGrey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="@{String.format(@string/screen_yap_for_you_display_text_completed_percentage , viewModel.achievement.completedPercentage+`%`)}"
+            android:visibility="@{viewModel.achievement.locked ? View.GONE : View.VISIBLE}"
+            android:textSize="@dimen/_10sdp"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            tools:text="75% completed" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

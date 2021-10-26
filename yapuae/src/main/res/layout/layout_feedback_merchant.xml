@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.transaction.feedback.TransactionFeedbackViewModel" />
+    </data>
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvMerchant"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="@dimen/_5sdp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingStart="@dimen/margin_medium_large">
+            <co.yap.widgets.CoreCircularImageView
+                android:id="@+id/ivMerchantImage"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:background="@drawable/bg_round_purple_enabled"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ic_achievement_complete"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:layout_marginBottom="@dimen/margin_normal"
+                />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMerchantName"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:text="@{viewModel.state.title != null ? viewModel.state.title : `No title available`}"
+                style="@style/ASmallGrey"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:singleLine="true"
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:ellipsize="end"
+                android:lines="1"
+                android:textColor="@color/colorMidnightExpress"
+                app:layout_constraintStart_toEndOf="@id/ivMerchantImage"
+                app:layout_constraintTop_toTopOf="@id/ivMerchantImage"
+                tools:text="StarBucks shefioewg ehgewoighqerioghqerghEOGIH"
+                />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvMerchantLocation"
+                style="@style/AMicroGrey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{viewModel.state.location != null ? viewModel.state.location :`No location found`}"
+                app:layout_constraintStart_toStartOf="@id/tvMerchantName"
+                android:layout_marginEnd="@dimen/margin_normal"
+                android:ellipsize="end"
+                android:lines="1"
+                android:singleLine="true"
+                app:layout_constraintTop_toBottomOf="@id/tvMerchantName"
+                app:layout_constraintBottom_toBottomOf="@+id/ivMerchantImage"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="StarBucks shefioewg ehgewoighqerioghqerghEOGIH"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+</layout>

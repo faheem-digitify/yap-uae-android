@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/choice"
+    style="@style/ChipsTheme"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:checkable="true"
+    android:padding="@dimen/margin_small"
+    android:text="Travel"
+    android:textColor="@color/chip_text_color"
+    android:theme="@style/Theme.MaterialComponents.Light"
+    app:chipBackgroundColor="@color/chip_background_color"
+    app:chipStrokeColor="@color/dividerNew"
+    app:chipStrokeWidth="1dp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />

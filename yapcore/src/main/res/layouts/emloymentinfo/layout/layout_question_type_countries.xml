@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.location.kyc_additional_info.employment_info.questionnaire.adapter.QuestionnaireItemViewModel" />
+
+        <variable
+            name="businessCountriesAdapter"
+            type="co.yap.modules.location.kyc_additional_info.employment_info.questionnaire.adapter.BusinessCountriesAdapter" />
+
+        <import type="android.view.View" />
+
+        <import type="co.yap.translation.Strings" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clCountries"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/lyTinNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTinNumber"
+                style="@style/ASmallGrey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:lineSpacingExtra="@dimen/_2sdp"
+                android:text="@{viewModel.questionUiFields.question.questionTitle}"
+                android:textColor="@color/darkSlateBlue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_reasons"
+                tools:text="Add all the countries your company does business with" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvBusinessCountries"
+                recycleViewAdapter="@{businessCountriesAdapter}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="@dimen/margin_small"
+                android:visibility="gone"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintStart_toStartOf="@+id/tvCategoriesTitle"
+                app:layout_constraintTop_toBottomOf="@+id/tvCategoriesTitle"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_business_country" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/searchCountries"
+                style="@style/ARegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:drawableEnd="@drawable/ic_search_grey"
+                android:onClick="@{viewModel::onViewClicked}"
+                android:text="Search countries"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorPrimaryDark" />
+
+            <include
+                layout="@layout/content_input_field_selector"
+                app:isFocus="@{viewModel.questionUiFields.isFocusInput}" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

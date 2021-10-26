@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.transaction.category.TransactionCategoryViewModel" />
+
+    </data>
+
+   <androidx.coordinatorlayout.widget.CoordinatorLayout android:layout_width="match_parent" android:layout_height="match_parent">
+       <include layout="@layout/layout_category_transaction"
+           app:viewModel="@{viewModel}"/>
+       <co.yap.widgets.CoreButton
+           android:id="@+id/btnConfirm"
+           style="@style/FragmentsBtnStyle"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:layout_marginBottom="@dimen/margin_medium_large"
+           android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+           android:text="Done"
+           app:btn_size="small"
+           app:enableCoreButton="@{viewModel.selectedCategory != null}"
+           android:layout_gravity="bottom|center_horizontal"/>
+   </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

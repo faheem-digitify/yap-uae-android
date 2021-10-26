@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="co.yap.translation.Strings" />
+
+        <import type="co.yap.yapcore.helpers.Utils" />
+
+        <import type="android.view.View" />
+
+        <import type="co.yap.translation.Translator" />
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.cards.addpaymentcard.spare.virtual.AddVirtualCardViewModel" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium_large"
+            android:layout_marginEnd="@dimen/margin_medium_large"
+            android:orientation="vertical">
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/viewPager"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:orientation="horizontal"
+                app:adapter="@{viewModel.adapter}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvYoungCardText"
+                style="@style/SmallGrey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_extra_large"
+                android:text="Choose a colour"
+                android:textColor="@color/colorPrimaryDark"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewPager"
+                tools:text="Choose a colour" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/margin_extra_large"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_normal_large"
+                app:layout_constraintTop_toBottomOf="@+id/tvYoungCardText"
+                app:tabGravity="center"
+                app:tabIndicator="@null"
+                app:tabPaddingEnd="6dp"
+                app:tabPaddingStart="6dp"
+                app:tabRippleColor="@null" />
+
+            <co.yap.widgets.CollapsedColoredHintTextInputLayout
+                android:id="@+id/ctcCardEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_large"
+                android:hint="@string/screen_add_virtual_spare_card_edit_name_label"
+                android:textColorHint="@color/colorPrimaryDark"
+                app:hintTextAppearance="@style/Small"
+                app:layout_constraintTop_toBottomOf="@+id/tabLayout"
+                tools:hint="Name your virtual card">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etCardName"
+                    style="@style/Large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionDone"
+                    android:importantForAutofill="no"
+                    android:inputType="textCapWords"
+                    android:maxLength="26"
+                    android:paddingBottom="@dimen/margin_normal"
+                    android:singleLine="true"
+                    android:text="@={viewModel.state.cardName}"
+                    android:textAllCaps="false"
+                    android:textColorHint="@color/colorPrimaryDarkFadedLight"
+                    android:theme="@style/Theme.EditText"
+                    app:hint="@{Strings.screen_add_virtual_spare_card_edit_name_hint}"
+                    tools:hint="@string/screen_add_virtual_spare_card_edit_name_hint" />
+            </co.yap.widgets.CollapsedColoredHintTextInputLayout>
+
+            <co.yap.widgets.CoreButton
+                android:id="@+id/btnNext"
+                style="@style/FragmentsBtnStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_btn_side_paddings"
+                android:layout_marginTop="@dimen/margin_extra_large"
+                android:layout_marginEnd="@dimen/margin_btn_side_paddings"
+                android:layout_marginBottom="@dimen/margin_medium_large"
+                android:onClick="@{(v) -> viewModel.handlePressOnButton(v.id)}"
+                android:text="@string/screen_phone_number_button_send"
+                app:enableCoreButton="@{viewModel.state.enabelCoreButton}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ctcCardEdit"
+                app:layout_constraintVertical_bias="0.877" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="co.yap.yapuae.R" />
+
+        <import type="co.yap.yapcore.helpers.extentions.CurrencyExtensionsKt" />
+
+        <import type="co.yap.yapcore.managers.SessionManager" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="price"
+            type="String" />
+
+        <variable
+            name="currency"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:constraint_referenced_ids="tpTitle,tvPrice,tvCurr"
+            app:flow_verticalGap="@dimen/margin_extra_small"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tpTitle"
+            style="@style/ARegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{title}"
+            android:textColor="@color/greyDark"
+            tools:text="Average" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvPrice"
+            style="@style/ATitle3Grey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{CurrencyExtensionsKt.toFormattedCurrency(price,false,SessionManager.INSTANCE.defaultCurrency,true)}"
+            android:textColor="@color/colorPrimaryDark"
+            tools:text="444.3" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCurr"
+            style="@style/ARegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{currency}"
+            android:textColor="@color/greyDark"
+            tools:text="AED" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

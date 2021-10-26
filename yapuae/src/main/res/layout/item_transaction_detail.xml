@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.transaction.detail.adaptor.TransactionDetailItemViewModel" />
+
+        <import type="android.view.View" />
+
+
+    </data>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/margin_normal"
+        >
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvItemTitle"
+            style="@style/ASmallGrey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{viewModel.item.label}"
+            tools:ignore="HardcodedText"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Card"
+            android:layout_marginEnd="@dimen/_20sdp"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvCardMask"
+            style="@style/ASmall"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            tools:text="*99999"
+            android:text="@{viewModel.item.value}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tvItemTitle"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

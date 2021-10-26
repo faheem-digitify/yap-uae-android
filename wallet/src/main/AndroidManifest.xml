@@ -1,0 +1,30 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="co.yap.wallet">
+
+
+    <application
+        android:allowBackup="false"
+        tools:remove="android:debuggable"
+        tools:replace="android:allowBackup">
+        <meta-data
+            android:name="debug_mode"
+            android:value="N" />
+        <!--        Debug API api Stage-->
+<!--        <meta-data-->
+<!--            android:name="spay_debug_api_key"-->
+<!--            android:value="049c4b5267754470ac8107de52512594" />-->
+
+        <!--        Debug API api live-->
+<!--        <meta-data-->
+<!--            android:name="spay_debug_api_key"-->
+<!--            android:value="d800be94a88e41b19ad085eb7c6199d4" />-->
+        <meta-data
+            android:name="spay_debug_api_key"
+            android:value="" />
+        <meta-data
+            android:name="spay_sdk_api_level"
+            android:value="2.14" />
+    </application>
+
+</manifest>

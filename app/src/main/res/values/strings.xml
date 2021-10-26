@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name_new" translatable="false">YAP</string>
+    <string name="action_settings" translatable="false">Settings</string>
+    <!--    <string name="brand_name" templateMergeStrategy="preserve" translatable="false">YAP Support</string>-->
+    <string name="brand_name">YAP Support</string>
+    <string name="screen_splash_display_text_force_update" translatable="false">Please update your app in order to continue.</string>
+    <string name="screen_splash_button_force_update" translatable="false">Update</string>
+
+<!--    Message when the conversation was resolved when we don't have the agent name. %1$s - time-->
+    <string name="lp_conversation_ended_by_agent_no_name">Conversation ended by Agent \n %1$s</string>
+<!--    Message when the conversation was resolved when we have an agent name. %1$s - agent name %2$s - time-->
+    <string name="lp_conversation_ended_by_agent_with_name">Conversation ended by %1$s \n %2$s</string>
+<!--    Message when the conversation was resolved by the client. %1$s - time-->
+    <string name="lp_conversation_ended_by_you">Conversation ended by You \n %1$s</string>
+</resources>

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.transaction.category.TransactionCategoryItemViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clCategory"
+        android:layout_width="match_parent"
+        android:onClick="@{(v) -> viewModel.handlePressOnView(v)}"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_extra_small"
+        android:paddingStart="@dimen/margin_medium"
+        android:paddingTop="@dimen/margin_small"
+        android:foregroundTint="@color/greySoft"
+        android:paddingEnd="@dimen/margin_medium"
+        android:paddingBottom="@dimen/margin_small"
+        android:layout_marginBottom="@dimen/margin_extra_small"
+        android:background="@{viewModel.item.selected? @color/greySoft : @color/transparent}">
+
+        <co.yap.widgets.CoreCircularImageView
+            android:id="@+id/ivCategory"
+            android:layout_width="@dimen/margin_extra_large"
+            android:layout_height="@dimen/margin_extra_large"
+            app:isBackground="@{true}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:position="@{viewModel.position}"
+            app:fullName="@{viewModel.item.categoryName==null?` `:viewModel.item.categoryName}"
+            app:imageUrl="@{viewModel.item.categoryIcon ?? ` `}"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/DarkSlateBlue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:maxLines="1"
+            android:text="@{viewModel.item.categoryName}"
+            app:layout_constraintBottom_toBottomOf="@+id/ivCategory"
+            app:layout_constraintStart_toEndOf="@+id/ivCategory"
+            app:layout_constraintTop_toTopOf="@+id/ivCategory"
+            tools:text="Kuj Vi Ho jaye" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:background="@drawable/round_teal_green_background"
+            android:src="@drawable/ic_check"
+            android:tint="@color/colorWhite"
+            android:padding="@dimen/margin_extra_small"
+            android:visibility="@{viewModel.item.selected?View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/ivCategory"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/ivCategory" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

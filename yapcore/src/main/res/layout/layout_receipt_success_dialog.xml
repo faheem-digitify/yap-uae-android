@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_white_round"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:layout_marginHorizontal="@dimen/margin_medium"
+    android:paddingStart="@dimen/margin_medium_large"
+    android:paddingTop="@dimen/margin_large"
+    android:paddingEnd="@dimen/margin_medium_large"
+    android:paddingBottom="@dimen/margin_medium">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/ic_receiptimage" />
+
+    <TextView
+        android:id="@+id/tvDescrip"
+        style="@style/ALarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginBottom="@dimen/_20sdp"
+        android:gravity="center"
+        android:lineSpacingExtra="1sp"
+        android:textColor="@color/colorPrimaryDark"
+        android:textColorHighlight="@color/transparent"
+        android:textColorLink="@color/colorPrimary"
+        tools:text=" sadasdassadh hkasdjkasdsahuasd" />
+
+    <co.yap.widgets.CoreButton
+        android:id="@+id/btnActionDone"
+        style="@style/FragmentsBtnStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/margin_xl"
+        android:layout_marginTop="@dimen/margin_large"
+        android:layout_marginRight="@dimen/margin_xl"
+        app:btn_enable="true"
+        android:text="@string/idenetity_scanner_sdk_screen_review_info_button_done"
+        />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvAddAnother"
+        style="@style/ALarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_large"
+        android:gravity="center"
+        android:lineSpacingExtra="1sp"
+        android:textColor="@color/colorPrimary"
+        android:textColorHighlight="@color/transparent"
+        android:textColorLink="@color/colorPrimary"
+        tools:text="@string/screen_transaction_add_another_receipt" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

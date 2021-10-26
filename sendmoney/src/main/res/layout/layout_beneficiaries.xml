@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.sendmoney.home.viewmodels.SMBeneficiariesViewModel" />
+
+        <import type="co.yap.translation.Strings" />
+
+        <import type="android.view.View" />
+
+        <import type="co.yap.sendmoney.R" />
+
+        <import type="co.yap.yapcore.enums.SendMoneyTransferType" />
+
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clYapScreenContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:background="@android:color/white"
+        android:focusableInTouchMode="true"
+        android:paddingStart="@dimen/small"
+        android:paddingEnd="@dimen/small">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSendMoneyTo"
+            style="@style/Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="6sp"
+            android:textColor="?attr/colorPrimaryDarkAttr"
+            android:textSize="@dimen/_14sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:text="@{Strings.screen_send_money_no_contacts_display_text_sub_heading}"
+            tools:text="@string/screen_send_money_no_contacts_display_text_sub_heading" />
+
+        <include
+            android:id="@+id/layoutRecent"
+            layout="@layout/layout_recent_beneficiaries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.state.isNoRecentBeneficiary? View.GONE : View.VISIBLE}"
+            app:adapter="@{viewModel.recentsAdapter}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tvSendMoneyTo" />
+
+        <include
+            android:id="@+id/layoutSearchView"
+            layout="@layout/layout_beneficiairy_search"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginStart="@dimen/margin_normal_large"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_normal_large"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/tvCancel"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutRecent"
+            app:viewModel="@{viewModel}" />
+
+        <TextView
+            android:id="@+id/tvCancel"
+            style="@style/ASmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/margin_normal_large"
+            android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+            android:text="@string/common_button_cancel"
+            android:textColor="?attr/colorPrimaryAttr"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/layoutSearchView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/layoutSearchView"
+            app:layout_constraintTop_toTopOf="@id/layoutSearchView" />
+
+        <TextView
+            android:id="@+id/txt_error"
+            style="@style/RegularGrey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_xl"
+            android:layout_marginBottom="@dimen/margin_large"
+            android:gravity="center"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:text="@{Strings.screen_y2y_display_text_no_result}"
+            tools:text="@string/screen_y2y_display_text_no_result" />
+
+        <TextView
+            android:id="@+id/tvAllBeneficiaries"
+            style="@style/ASmall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:gravity="start"
+            android:layout_marginStart="@dimen/margin_normal_large"
+            android:text="@string/screen_send_money_display_text_all_beneficiaries"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layoutSearchView"
+            app:text="@{viewModel.state.sendMoneyType.equals(SendMoneyTransferType.LOCAL.name) ? Strings.screen_send_money_display_text_all_local_beneficiaries : Strings.screen_send_money_display_text_all_beneficiaries}" />
+
+        <co.yap.widgets.skeletonlayout.ShimmerRecyclerView
+            android:id="@+id/rvAllBeneficiaries"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/small"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvAllBeneficiaries"
+            app:layout_constraintVertical_bias="0.0"
+            app:recycleViewAdapter="@{viewModel.beneficiariesAdapter}"
+            tools:listitem="@layout/layout_item_beneficiary"
+            tools:visibility="visible"
+            app:shimmerLayoutId="@layout/layout_item_beneficiary_shimmer"
+            app:itemCount = "@integer/skeleton_layout_item_count"
+            app:rvAdapter="@{viewModel.beneficiariesAdapter}"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

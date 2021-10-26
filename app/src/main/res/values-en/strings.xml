@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="brand_name">YAP Support</string>
+    <!--    Message when the conversation was resolved when we don't have the agent name. %1$s - time-->
+    <string name="lp_conversation_ended_by_agent_no_name">Conversation ended by Agent \n %1$s</string>
+    <!--    Message when the conversation was resolved when we have an agent name. %1$s - agent name %2$s - time-->
+    <string name="lp_conversation_ended_by_agent_with_name">Conversation ended by %1$s \n %2$s</string>
+    <!--    Message when the conversation was resolved by the client. %1$s - time-->
+    <string name="lp_conversation_ended_by_you">Conversation ended by You \n %1$s</string>
+</resources>

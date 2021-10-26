@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.sendmoney.y2y.transfer.viewmodels.Y2YFundsTransferViewModel" />
+
+        <import type="co.yap.translation.Strings" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/lyY2Y"
+            layout="@layout/layout_y2y_funds_transfer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{viewModel.parentViewModel.state.fromQR?View.GONE: View.VISIBLE}"
+            app:viewModel="@{viewModel}"
+            tools:visibility="visible" />
+
+        <include
+            android:id="@+id/lyQrY2Y"
+            layout="@layout/layout_qr_funds_transfer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="@{viewModel.parentViewModel.state.fromQR?View.VISIBLE: View.GONE}"
+            app:viewModel="@{viewModel}"
+            tools:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

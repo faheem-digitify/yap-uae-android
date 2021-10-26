@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="cardPlansItemViewModel"
+            type="co.yap.modules.dashboard.store.cardplans.viewmodels.CardPlansItemViewModel" />
+
+        <import type="co.yap.yapuae.R" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_medium_large"
+        android:layout_marginEnd="@dimen/margin_normal"
+        android:background='@{cardPlansItemViewModel.item.type.equals("Prime")?@drawable/bg_card_plan_purple:@drawable/bg_card_plan_blue}'
+        android:paddingVertical="@dimen/margin_small"
+        tools:background="@drawable/bg_card_plan_purple">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/banner"
+            android:layout_width="@dimen/_195sdp"
+            android:layout_height="wrap_content"
+            android:src='@{cardPlansItemViewModel.item.type.equals("Prime")?@drawable/ic_banner_prime_card:@drawable/ic_banner_metal_card}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_banner_metal_card" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cardLabel"
+            style="@style/ARegularGrey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium_large"
+            android:text="@{cardPlansItemViewModel.item.type}"
+            android:textColor='@{cardPlansItemViewModel.item.type.equals("Prime")? @color/colorPrimaryDark:@color/purpleLightCard}'
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Prime" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

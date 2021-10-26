@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="co.yap.translation.Strings" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_small"
+        android:layout_marginStart="@dimen/margin_medium"
+        >
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivTick"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:src="@drawable/ic_achievement_complete"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvBenefit"
+            app:layout_constraintBottom_toBottomOf="@+id/tvBenefit"
+            />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvBenefit"
+            style="@style/ASmallGrey"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_medium_large"
+            android:ellipsize="end"
+            android:lines="2"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivTick"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:text="@{Strings.screen_send_money_home_display_text_send_money_home}"
+            tools:text="@string/screen_send_money_home_display_text_send_money_home" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

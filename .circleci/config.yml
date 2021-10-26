@@ -1,0 +1,42 @@
+
+
+version: 2.1
+
+orbs:
+  android: circleci/android@1.0
+
+jobs:
+  build:
+    docker:
+      - image: circleci/android:api-30
+    environment:
+      JVM_OPTS: -Xmx4096m
+      GRADLE_OPTS: -Xmx4096m -XX:+HeapDumpOnOutOfMemoryError -Dorg.gradle.caching=true -Dorg.gradle.configureondemand=true -Dkotlin.compiler.execution.strategy=in-process -Dkotlin.incremental=false
+      FL_OUTPUT_DIR: outputs/apk
+      FASTLANE_LANE: upload_to_appcenter
+    steps:
+      - checkout
+      - restore_cache:
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Download Dependencies
+          command: ./gradlew androidDependencies
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
+      - run:
+          name: Install fastlane
+          command: bundle install
+      - run:
+          name: Execute fastlane
+          command: bundle exec fastlane $FASTLANE_LANE
+
+workflows:
+  build_and_upload_to_app_center:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - Sprint/SPRINT-YAP-RAK-8-A-bill-payments

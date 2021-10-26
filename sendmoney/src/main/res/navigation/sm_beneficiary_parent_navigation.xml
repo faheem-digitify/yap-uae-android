@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sm_beneficiary_parent_navigation"
+    app:startDestination="@id/sendMoneyLandingActivity">
+
+    <fragment
+        android:id="@+id/sendMoneyLandingActivity"
+        android:name="co.yap.sendmoney.home.activities.SMBeneficiariesFragment"
+        android:label="SendMoneyLandingActivity"
+        tools:layout="@layout/activity_send_money_landing">
+        <action
+            android:id="@+id/action_sendMoneyLandingActivity_to_searchBeneficiariesFragment"
+            app:destination="@id/searchBeneficiariesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchBeneficiariesFragment"
+        android:name="co.yap.sendmoney.home.activities.SearchBeneficiariesFragment"
+        android:label="SearchBeneficiariesFragment"
+        tools:layout="@layout/fragment_search_beneficiary" />
+</navigation>

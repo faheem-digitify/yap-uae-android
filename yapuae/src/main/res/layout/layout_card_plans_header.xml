@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <variable
+            name="icon"
+            type="android.graphics.drawable.Drawable" />
+        <variable
+            name="title"
+            type="String" />
+        <variable
+            name="description"
+            type="String" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="@dimen/margin_medium"
+        android:paddingEnd="@dimen/margin_medium_large">
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/cardIcon"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:src="@{icon}"
+            tools:src="@drawable/ic_card_plans"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cardLabel"
+            android:layout_width="0dp"
+            style="@style/ARegularGrey"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{title}"
+            app:layout_constraintStart_toEndOf="@+id/cardIcon"
+            android:layout_marginStart="@dimen/margin_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Card Plans"/>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/cardDescription"
+            android:layout_width="0dp"
+            style="@style/MicroGrey"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
+            app:layout_constraintStart_toEndOf="@+id/cardIcon"
+            android:text="@{description}"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:lineHeight="@dimen/_14sdp"
+            app:layout_constraintTop_toBottomOf="@+id/cardLabel"
+            tools:text="csicnfewonclcsnslcn csicnfewonclcsnslcn csicnfewonclcsnslcn csicnfewonclcsnslcn"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

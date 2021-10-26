@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.transaction.totalpurchases.TotalPurchasesViewModel" />
+
+        <import type="co.yap.yapcore.R" />
+
+        <import type="android.view.View" />
+
+        <import type="co.yap.yapcore.enums.TransactionStatus" />
+
+        <import type="co.yap.yapcore.helpers.Utils" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <co.yap.widgets.CoreToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:leftIcon="@{R.drawable.ic_back_arrow_left}"
+            app:leftIconVisibility="@{true}"
+            app:onClick="@{viewModel::onToolBarClick}"
+            app:titleString="@{viewModel.state.toolbarTitle}" />
+
+        <co.yap.widgets.CoreCircularImageView
+            android:id="@+id/ivMerchantLogo"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin_normal_large"
+            android:alpha="@{viewModel.transaction.status.equals(TransactionStatus.CANCELLED.name) || viewModel.transaction.status.equals(TransactionStatus.FAILED.name)? 0.5f : 1.0f}"
+            android:background="@drawable/bg_round_purple_enabled"
+            tools:src="@drawable/ic_access_alarm" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/AppFontRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/margin_medium_large"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium_large"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:maxLines="1"
+            android:singleLine="true"
+            android:text="@{viewModel.transaction.merchantName}"
+            android:textColor="@color/greyDark"
+            android:textSize="@dimen/text_size_h2"
+            tools:text="StarBucks" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/AppFontRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="2dp"
+            android:text="@{`AED ` +Utils.INSTANCE.getFormattedCurrency(viewModel.state.totalSpendings)}"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="@dimen/text_size_h6"
+            tools:text="AED 82.50" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal_large"
+            android:layout_marginTop="@dimen/margin_extra_large"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:lineSpacingExtra="6sp"
+            android:text="Transactions"
+            android:textColor="@color/colorMidnightExpress"
+            android:textSize="@dimen/_12sdp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@drawable/line_divider" />
+
+        <co.yap.widgets.MultiStateView
+            android:id="@+id/multiStateView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_weight="1"
+            app:msv_animateViewChanges="true"
+            app:msv_emptyView="@layout/error_view_no_transaction_found"
+            app:msv_errorView="@layout/error_view_no_transaction_found"
+            app:msv_loadingView="@layout/layout_loading_view">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:adapter="@{viewModel.adapter}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:reverseLayout="false"
+            tools:listitem="@layout/item_analytics_transaction_list" />
+        </co.yap.widgets.MultiStateView>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

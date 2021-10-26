@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.transaction.search.TransactionSearchViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="0dp"
+            app:cardElevation="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivCloseSearch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+                    android:paddingStart="@dimen/margin_medium"
+                    android:paddingEnd="@dimen/margin_medium"
+                    android:src="@drawable/ic_close"
+                    android:tint="?attr/colorPrimary" />
+
+                <!--                <androidx.appcompat.widget.SearchView-->
+                <!--                    android:id="@+id/svTransactions"-->
+                <!--                    style="@style/ALarge"-->
+                <!--                    android:layout_width="0dp"-->
+                <!--                    android:layout_height="?attr/actionBarSize"-->
+                <!--                    android:layout_marginStart="@dimen/small_text_size"-->
+                <!--                    android:layout_marginEnd="@dimen/margin_medium"-->
+                <!--                    android:layout_weight="1"-->
+                <!--                    android:background="@color/transparent"-->
+                <!--                    android:hint="Search for transaction"-->
+                <!--                    app:iconifiedByDefault="false" />-->
+
+                <androidx.appcompat.widget.SearchView
+                    android:id="@+id/svTransactions"
+                    android:layout_width="0dp"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginStart="@dimen/margin_extra_small"
+                    android:layout_marginEnd="@dimen/margin_medium"
+                    android:layout_weight="1"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    style="@style/AppSearchView"
+                    app:closeIcon="@null"
+                    app:queryHint="Search for transaction"
+                    app:iconifiedByDefault="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:searchHintIcon="@null"
+                    app:searchIcon="@null"
+                    app:queryBackground="@android:color/transparent"
+                    />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.cardview.widget.CardView>
+
+        <co.yap.widgets.MultiStateView
+            android:id="@+id/multiStateView"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/cardView"
+            app:msv_animateViewChanges="false"
+            app:msv_emptyView="@layout/error_view_no_transaction_found"
+            app:msv_errorView="@layout/error_view_no_transaction_found"
+            app:msv_loadingView="@layout/layout_loading_view">
+
+            <co.yap.widgets.advrecyclerview.pagination.PaginatedRecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentTop="true"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_search_transaction_child" />
+        </co.yap.widgets.MultiStateView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

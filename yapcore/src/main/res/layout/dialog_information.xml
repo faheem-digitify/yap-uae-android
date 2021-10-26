@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="co.yap.translation.Strings" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_round"
+        android:padding="@dimen/margin_medium">
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:constraint_referenced_ids="tbBtnInfo,tvDialogTitle,tvMessage,btnClose"
+            app:flow_verticalGap="@dimen/margin_medium"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/tbBtnInfo"
+            android:layout_width="@dimen/_32sdp"
+            android:layout_height="@dimen/_32sdp"
+            android:background="@drawable/bg_round_primary"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="@dimen/_4sdp"
+            android:tint="@color/white"
+            app:enabled="@{false}"
+            app:srcCompat="@drawable/ic_support" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvDialogTitle"
+            style="@style/Large"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lineSpacingExtra="0.5sp"
+            android:textColor="@color/colorDarkGrey"
+            android:text="@string/screen_employment_information_dialog_display_text_heading"
+            app:text="@{Strings.screen_employment_information_dialog_display_text_heading}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMessage"
+            style="@style/SmallGrey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:lineSpacingExtra="3sp"
+            android:text="@string/screen_employment_information_dialog_display_text_subheading"
+            tools:text="@string/screen_employment_information_dialog_display_text_subheading" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/btnClose"
+            style="@style/Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            android:text="@string/screen_employment_information_dialog_button_text_close"
+            android:textColor="?attr/colorPrimaryAttr" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.addionalinfo.viewmodels.AdditionalInfoViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:visibility="@{viewModel.state.showHeader? View.VISIBLE :View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <co.yap.widgets.stepview.StepView
+                android:id="@+id/step_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:sv_animationType="Line"
+                app:sv_doneCircleColor="@color/colorPrimary"
+                app:sv_doneCircleRadius="@dimen/_16sdp"
+                app:sv_doneStepLineColor="@color/stepview_line_done"
+                app:sv_doneStepMarkColor="@color/white"
+                app:sv_nextStepCircleColor="@color/colorPrimaryDark"
+                app:sv_nextStepCircleEnabled="true"
+                app:sv_nextStepLineColor="@color/stepview_line_done"
+                app:sv_selectedCircleRadius="@dimen/_16sdp"
+                app:sv_selectedStepNumberColor="@color/white"
+                app:sv_stepLineWidth="@dimen/_1sdp"
+                app:sv_stepNumberTextSize="@dimen/_12sdp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <fragment
+            android:id="@+id/additional_info_host_fragment"
+            android:name="androidx.navigation.fragment.NavHostFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:defaultNavHost="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/clHeader"
+            app:navGraph="@navigation/additional_info_navigation" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

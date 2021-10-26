@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="co.yap.translation.Strings" />
+
+        <import type="android.view.View" />
+        <import type="androidx.core.graphics.ColorUtils" />
+
+        <import type="co.yap.yapuae.R" />
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.more.yapforyou.viewmodels.YAPForYouViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+
+        <co.yap.widgets.CoreToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="@{viewModel.state.toolbarVisibility ? View.VISIBLE : View.GONE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftIcon="@{R.drawable.ic_back_arrow_left}"
+            app:leftIconVisibility="@{true}"
+            app:onClick="@{viewModel::onToolBarClick}"
+            app:rightIcon="@{R.drawable.ic_trade}"
+            app:rightIconEnabled="@{viewModel.state.isNoCompletedAchievements? false : true}"
+            app:rightIconVisibility="@{true}"
+            app:titleString="@{viewModel.state.toolbarTitle}" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:fillViewport="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tvHeading"
+                    style="@style/ATitle3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Current achievement"
+                    android:layout_marginTop="@dimen/margin_extra_large"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivAchievement"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:alpha="@{viewModel.state.currentAchievement.completed ? 1f : 0.5f}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvHeading"
+                    tools:src="@drawable/ic_gs_badge"
+                    app:srcCompat="@{viewModel.state.currentAchievement.achievementImage}" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/imgIconInner"
+                    android:layout_width="@dimen/_24sdp"
+                    android:layout_height="@dimen/_24sdp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    app:srcCompat="@{viewModel.state.currentAchievement.achievementStatusIcon}"
+                    android:tint="@color/white"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivAchievement"
+                    app:layout_constraintEnd_toEndOf="@+id/ivAchievement"
+                    app:layout_constraintStart_toStartOf="@+id/ivAchievement"
+                    app:layout_constraintTop_toTopOf="@+id/ivAchievement"
+                    app:layout_constraintVertical_bias="0.37"
+                    tools:src="@drawable/ic_yap_it" />
+
+                <TextView
+                    android:id="@+id/tvTitle"
+                    style="@style/ARegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    app:layout_constraintTop_toBottomOf="@+id/ivAchievement"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:text="@{viewModel.state.currentAchievement.title}"
+                    tools:text="Better together" />
+
+                <TextView
+                    android:id="@+id/tvCompltedPercentage"
+                    style="@style/MicroGrey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_extra_small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@{String.format(@string/screen_yap_for_you_display_text_completed_percentage , viewModel.state.currentAchievement.completedPercentage+`%`)}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:text="100% completed"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTitle" />
+
+                <co.yap.widgets.CoreButton
+                    android:id="@+id/btnView"
+                    style="@style/RectangleBtnSmallStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:onClick="@{(v)->viewModel.handlePressOnView(v.id)}"
+                    android:paddingTop="0dp"
+                    android:paddingBottom="0dp"
+                    app:btn_enable="true"
+                    app:btn_size="mini_small"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCompltedPercentage"
+                    app:text="@{Strings.screen_yap_for_you_display_text_view}"
+                    tools:text="@string/screen_yap_for_you_display_text_view" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rvYapForYou"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:dividerHeight="2dp"
+                    android:nestedScrollingEnabled="true"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/btnView"
+                    app:recycleViewAdapter="@{viewModel.adaptor}"
+                    app:spanCount="2"
+                    tools:itemCount="5"
+                    tools:listitem="@layout/item_yap_for_you" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

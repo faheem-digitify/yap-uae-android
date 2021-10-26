@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="adapter"
+            type="co.yap.widgets.recent_transfers.CoreRecentTransferAdapter" />
+
+        <variable
+            name="viewModel"
+            type="co.yap.sendmoney.y2y.home.viewmodel.YapToYapViewModel" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <LinearLayout
+        android:id="@+id/lyRecentParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSendMoneyTo"
+            style="@style/Regular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="6sp"
+            android:text="@string/screen_y2y_display_text_send_money_to"
+            android:textColor="?attr/colorPrimaryDarkAttr"
+            android:textSize="@dimen/_14sdp" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:orientation="horizontal">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/recents"
+                style="@style/AppFontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:enabled="@{viewModel.state.isRecentsVisible?true:false}"
+                android:lineSpacingExtra="6sp"
+                android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+                android:padding="@dimen/small"
+                android:text="@{viewModel.state.isRecentsVisible == false ? @string/screen_y2y_display_text_recent_transfer : @string/common_display_text_show_recent_transfer}"
+                android:textColor="@{viewModel.state.isRecentsVisible == false? @color/greyDark : @color/colorPrimary}"
+                android:textSize="12sp"
+                android:textStyle="normal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/screen_y2y_display_text_recent_transfer" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvHideRecents"
+                style="@style/AppFontRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+                android:padding="@dimen/small"
+                android:text="Hide"
+                android:textColor="?attr/colorPrimaryAttr"
+                android:textSize="12sp"
+                android:visibility="@{viewModel.state.isRecentsVisible ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.93"
+                app:layout_constraintStart_toEndOf="@+id/recents"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:textColor="@color/colorPrimary" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/_16sdp"
+            android:visibility="@{viewModel.state.isRecentsVisible ? View.GONE : View.VISIBLE}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:recycleViewAdapter="@{adapter}"
+            tools:listitem="@layout/item_recent_transfer" />
+
+        <View
+            android:id="@+id/seprator"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="#1e979797"
+            android:visibility="@{viewModel.state.isRecentsVisible ? View.GONE : View.VISIBLE}" />
+    </LinearLayout>
+</layout>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="co.yap.translation.Strings" />
+
+        <variable
+            name="viewModel"
+            type="co.yap.sendmoney.addbeneficiary.viewmodels.SelectCountryViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite">
+        <TextView
+            android:id="@+id/tvSelectCountryHeading"
+            style="@style/Large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_large"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:gravity="center"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:text="@{Strings.screen_add_beneficiary_display_text_country_title}"
+            tools:text="@string/screen_add_beneficiary_display_text_country_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvHeadingDetail"
+            style="@style/ARegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="44dp"
+            app:layout_constraintHorizontal_bias="0.076"
+            app:textColor="@{viewModel.state.selectedCountry == null}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSelectCountryHeading"
+            app:text="@{Strings.screen_add_beneficiary_display_text_select_country}"
+            tools:text="@string/screen_add_beneficiary_display_text_select_country" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/SmallGrey"
+            android:id="@+id/tvCountrySelect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:gravity="center_vertical"
+            android:paddingBottom="@dimen/margin_extra_small"
+            android:paddingTop="@dimen/margin_small"
+            android:background="@drawable/bg_edit_text_disable_grey_under_line"
+            android:drawableEnd="@{viewModel.state.selectedCountry == null ? @drawable/iv_drown_down: @drawable/iv_drown_down}"
+            android:drawablePadding="@dimen/_6sdp"
+            android:onClick="@{(v) -> viewModel.handlePressOnSeclectCountry(v.id)}"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
+            app:layout_constraintTop_toBottomOf="@+id/tvHeadingDetail"
+            android:paddingStart="@dimen/margin_extra_small"
+            android:paddingEnd="@dimen/margin_extra_small"
+            tools:text="@string/screen_add_beneficiary_display_text_select_country"
+            android:text="@{viewModel.state.selectedCountry == null ? @string/screen_add_beneficiary_display_text_select_country : viewModel.state.selectedCountry.name}"
+            android:textColor="@{viewModel.state.selectedCountry == null ? @color/greyDark : @color/colorPrimaryDark}"
+            app:flagOnDrawableStart="@{viewModel.state.selectedCountry.isoCountryCode2Digit}"
+            app:showDropDown="@{true}" />
+
+        <co.yap.widgets.CoreButton
+            android:id="@+id/nextButton"
+            style="@style/FragmentsBtnStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:btn_size="small"
+            android:layout_marginTop="@dimen/_60sdp"
+            android:layout_marginBottom="@dimen/margin_extra_large"
+            android:onClick="@{(v) -> viewModel.handlePressOnSeclectCountry(v.id)}"
+            app:enableCoreButton="@{viewModel.state.selectedCountry != null}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:text="@{Strings.screen_add_beneficiary_button_next}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="@string/screen_add_beneficiary_display_text_select_country" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

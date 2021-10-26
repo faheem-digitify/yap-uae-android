@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.location.kyc_additional_info.employment_info.questionnaire.adapter.QuestionnaireItemViewModel" />
+
+        <import type="android.view.View" />
+
+        <import type="co.yap.translation.Strings" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clQuestionTypeDropdownView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTinNumber"
+                style="@style/ASmallGrey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:textColor="@color/darkSlateBlue"
+                android:lineHeight="@dimen/_16sdp"
+                android:text="@{viewModel.questionUiFields.question.questionTitle}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_reasons"
+                tools:text="Which of the following statements describes you best?" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDropDown"
+                style="@style/ARegular"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:background="@null"
+                android:drawableRight="@drawable/ic_chevron_down"
+                android:gravity="center_vertical"
+                android:onClick="@{viewModel::onViewClicked}"
+                android:paddingTop="@dimen/margin_extra_small"
+                android:paddingBottom="@dimen/margin_extra_small"
+                android:drawableTint="@color/greyDark"
+                android:text="@{viewModel.questionUiFields.question.answer.length()>0?viewModel.questionUiFields.question.answer:viewModel.questionUiFields.question.placeholder}"
+                tools:text="Select from list" />
+
+            <include
+                layout="@layout/content_input_field_selector"
+                app:isFocus="@{viewModel.questionUiFields.isFocusInput}" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

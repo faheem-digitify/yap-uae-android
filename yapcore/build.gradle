@@ -1,0 +1,23 @@
+android {
+    sourceSets {
+        main {
+            res {
+                srcDirs 'src/main/res', 'src/main/res/layouts/emloymentinfo'
+            }
+        }
+    }
+}
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Test dependencies
+    project.testDependencies.each {
+        add(it.configuration, it.dependency)
+    }
+
+    // module specific dependencies
+    project.yapcoreDependencies.each {
+        add(it.configuration, it.dependency)
+    }
+    implementation 'com.google.zxing:core:3.4.0'
+}

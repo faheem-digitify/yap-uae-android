@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="co.yap.translation.Strings" />
+
+        <variable
+            name="viewModel"
+            type="co.yap.sendmoney.home.viewmodels.SMBeneficiariesViewModel" />
+
+        <import type="android.view.View" />
+
+        <import type="co.yap.sendmoney.R" />
+        <import type="co.yap.yapcore.enums.SendMoneyTransferType"/>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorWhite"
+        android:orientation="vertical">
+        <co.yap.widgets.CoreToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftIcon="@{R.drawable.ic_close}"
+            app:leftIconVisibility="@{true}"
+            app:onClick="@{viewModel::onToolBarClick}"
+            app:rightIcon="@{R.drawable.ic_add_beneficiary}"
+            app:rightIconVisibility="@{true}"
+            app:titleTranslator="@{viewModel.state.sendMoneyType.equals(SendMoneyTransferType.LOCAL.name) ? Strings.screen_send_money_display_text_title_local : Strings.screen_send_money_display_text_title_international }"
+            />
+
+
+        <include
+            android:id="@+id/layoutNoContacts"
+            layout="@layout/layout_no_contacts"
+            android:paddingLeft="@dimen/margin_medium"
+            android:paddingRight="@dimen/margin_medium"
+            android:visibility="@{viewModel.state.isNoBeneficiary()?View.VISIBLE:View.GONE}"
+            app:viewModel="@{viewModel}"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/layoutBeneficiaries"
+            layout="@layout/layout_beneficiaries"
+            app:viewModel="@{viewModel}"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+</layout>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.more.notifications.setting.NotificationSettingsViewModel" />
+
+        <import type="co.yap.yapuae.R" />
+
+        <import type="co.yap.translation.Strings" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <co.yap.widgets.CoreToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:leftIcon="@{R.drawable.ic_back_arrow_left}"
+            app:leftIconVisibility="@{true}"
+            app:onClick="@{viewModel::onToolBarClick}"
+            app:rightIconVisibility="@{false}"
+            app:titleTranslator="@{Strings.screen_notification_settings_display_text_toolbar_title}" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swNotifications"
+            style="@style/Regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_medium_large"
+            android:checked="@{viewModel.state.inAppNotificationsAllowed}"
+            android:gravity="start"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingTop="@dimen/margin_small"
+            android:paddingEnd="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_small"
+            android:text="@string/screen_notification_settings_display_text_in_app_notifications"
+            android:theme="@style/CustomSwitch" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swSms"
+            style="@style/Regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:checked="@{viewModel.state.smsNotificationsAllowed}"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingTop="@dimen/margin_small"
+            android:paddingEnd="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_small"
+            android:text="@string/screen_notification_settings_display_text_sms_notifications"
+            android:theme="@style/CustomSwitch" />
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/swEmail"
+            style="@style/Regular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_medium_large"
+            android:checked="@{viewModel.state.emailNotificationsAllowed}"
+            android:paddingStart="@dimen/margin_medium"
+            android:paddingTop="@dimen/margin_small"
+            android:paddingEnd="@dimen/margin_medium"
+            android:paddingBottom="@dimen/margin_small"
+            android:text="@string/screen_notification_settings_display_text_email_notifications"
+            android:theme="@style/CustomSwitch" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</layout>

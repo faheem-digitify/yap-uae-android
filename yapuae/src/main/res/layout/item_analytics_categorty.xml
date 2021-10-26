@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.cards.analytics.viewmodels.AnalyticsItemViewModel" />
+
+        <import type="co.yap.yapcore.helpers.Utils" />
+
+        <import type="co.yap.yapcore.helpers.extentions.CurrencyExtensionsKt" />
+
+        <import type="co.yap.yapcore.managers.SessionManager" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/lyAnalyticsItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="@{(v) -> viewModel.onViewClicked(v)}"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <co.yap.widgets.CoreCircularImageView
+                android:id="@+id/lyAnalyticsImage"
+                android:layout_width="@dimen/_40sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_gravity="center_horizontal"
+                android:contentDescription="@string/empty_string"
+                app:categoryTitle="@{viewModel.analyticsItem.title.empty || viewModel.analyticsItem.title == null?`General`:viewModel.analyticsItem.title}"
+                app:imageLogo="@{viewModel.analyticsItem.logoUrl == null ? ` ` : viewModel.analyticsItem.logoUrl}"
+                app:isBackground="@{true}"
+                android:padding="@{viewModel.analyticsItem.title.empty || viewModel.analyticsItem.title == null?@dimen/margin_zero_dp :@dimen/_10sdp}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:position="@{viewModel.position}"
+                app:showFirstInitials="@{true}"
+                app:cropImage="@{viewModel.analyticsItem.logoUrl == null || viewModel.analyticsItem.logoUrl == ` ` || viewModel.analyticsItem.logoUrl.empty? true :false}"
+                />
+
+            <LinearLayout
+                android:id="@+id/content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_normal"
+                android:layout_marginEnd="@dimen/margin_small"
+                android:gravity="center"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="@id/lyAnalyticsImage"
+                app:layout_constraintEnd_toStartOf="@+id/tvAmount"
+                app:layout_constraintStart_toEndOf="@id/lyAnalyticsImage"
+                app:layout_constraintTop_toTopOf="@id/lyAnalyticsImage">
+
+                <TextView
+                    android:id="@+id/tvName"
+                    style="@style/Regular"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:gravity="bottom"
+                    android:lineSpacingExtra="0dp"
+                    android:lines="1"
+                    android:text="@{viewModel.analyticsItem.title.empty || viewModel.analyticsItem.title == null ? `General`:viewModel.analyticsItem.title}"
+                    android:textSize="@dimen/text_size_h2"
+                    tools:text="Shopping" />
+
+                <TextView
+                    android:id="@+id/tvTransactionCount"
+                    style="@style/SmallGrey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="@{viewModel.analyticsItem.txnCount==1?viewModel.analyticsItem.txnCount+` transaction`:viewModel.analyticsItem.txnCount+` transactions`}"
+                    tools:text="5 transactions" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvAmount"
+                style="@style/Regular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@{CurrencyExtensionsKt.toFormattedCurrency(viewModel.analyticsItem.totalSpending,true,SessionManager.INSTANCE.defaultCurrency,true)}"
+                android:textSize="@dimen/text_size_h2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/content"
+                tools:text="AED 600.30" />
+
+            <TextView
+                android:id="@+id/tvSpendingPercentage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{Utils.INSTANCE.getTwoDecimalPlaces(viewModel.analyticsItem.totalSpendingInPercentage)+`%`}"
+                android:textSize="@dimen/text_size_h2"
+                app:layout_constraintBottom_toBottomOf="@+id/content"
+                app:layout_constraintEnd_toEndOf="@+id/tvAmount"
+                tools:text="42%" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/divider"
+                app:layout_constraintEnd_toEndOf="@id/tvAmount"
+                app:layout_constraintStart_toStartOf="@+id/content"
+                app:layout_constraintTop_toBottomOf="@+id/tvSpendingPercentage" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

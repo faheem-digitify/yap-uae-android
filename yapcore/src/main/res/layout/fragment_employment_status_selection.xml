@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="co.yap.translation.Strings" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.location.kyc_additional_info.employment_info.status.EmploymentStatusSelectionViewModel" />
+    </data>
+
+    <ScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_20sdp">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEmploymentInfoTitle"
+                style="@style/Title3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:text="@{Strings.screen_employment_information_selection_display_text_title}"
+                tools:text="@string/screen_employment_information_selection_display_text_title" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEmploymentStatusText"
+                style="@style/RegularGrey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvEmploymentInfoTitle"
+                app:text="@{Strings.screen_employment_information_selection_display_text_employment_status}"
+                tools:text="@string/screen_employment_information_selection_display_text_employment_status" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvEmploymentStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_extra_large"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:nestedScrollingEnabled="false"
+                app:layout_constraintTop_toBottomOf="@+id/tvEmploymentStatusText"
+                app:recycleViewAdapter="@{viewModel.employmentStatusAdapter}"
+                tools:itemCount="4"
+                tools:listitem="@layout/item_employment_status_selection" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvBottomDescription"
+                style="@style/SmallGrey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:gravity="center"
+                android:lineSpacingExtra="6sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:textColor="@color/darkBlue"
+                app:layout_constraintTop_toBottomOf="@+id/rvEmploymentStatus"
+                app:text="@{Strings.screen_employment_information_selection_display_text_we_only_ask_this_for_administrative_purpose}"
+                tools:text="@string/screen_employment_information_selection_display_text_we_only_ask_this_for_administrative_purpose" />
+
+            <co.yap.widgets.CoreButton
+                android:id="@+id/btnNext"
+                style="@style/FragmentsBtnStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_extra_large"
+                android:layout_marginBottom="@dimen/margin_medium"
+                android:onClick="@{(v)-> viewModel.handleOnPressNext(v.id)}"
+                app:btn_size="small"
+                app:btn_text_size="@dimen/text_size_h4"
+                app:enableCoreButton="@{viewModel.state.enableNextButton}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvBottomDescription"
+                app:text="@{Strings.screen_employment_information_selection_display_button_text_next}"
+                tools:text="@string/screen_employment_information_selection_display_button_text_next" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

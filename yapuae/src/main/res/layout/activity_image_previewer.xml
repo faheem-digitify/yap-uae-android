@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.transaction.receipt.viewer.ImageViewerViewModel" />
+
+        <import type="android.view.View" />
+
+        <import type="co.yap.yapcore.R" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            app:adapter="@{viewModel.imagesViewerAdapter}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <RelativeLayout
+            android:id="@+id/bottomActions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:gravity="center"
+            android:minHeight="@dimen/_65sdp"
+            android:paddingBottom="@dimen/_16sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivActionShare"
+                android:layout_width="@dimen/_27sdp"
+                android:layout_height="@dimen/_27sdp"
+                android:layout_marginRight="@dimen/_50sdp"
+                android:gravity="center_horizontal"
+                android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+                app:srcCompat="@drawable/ic_share_reciept"
+                app:tint="@color/colorPrimary"
+                app:tintMode="src_atop" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivActionDelete"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_alignTop="@+id/ivActionShare"
+                android:layout_alignBottom="@+id/ivActionShare"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:layout_toRightOf="@+id/ivActionShare"
+                android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+                app:srcCompat="@drawable/ic_delete_bin" />
+
+        </RelativeLayout>
+
+        <co.yap.widgets.CoreToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:visibility="@{View.VISIBLE}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftIcon="@{R.drawable.ic_close}"
+            app:leftIconVisibility="@{true}"
+            app:onClick="@{viewModel::onToolBarClick}"
+            app:rightIconVisibility="@{false}"
+            app:titleString="@{viewModel.state.imageReceiptTitle}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="co.yap.yapuae.R" />
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.yapit.sendmoney.homecountry.SMHomeCountryViewModel" />
+
+        <import type="co.yap.yapcore.managers.SessionManager" />
+
+        <import type="co.yap.translation.Strings" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:animateLayoutChanges="true">
+
+            <co.yap.widgets.CoreToolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:leftIcon="@{R.drawable.ic_closeicon}"
+                app:leftIconVisibility="@{true}"
+                app:onClick="@{viewModel::onToolBarClick}"
+                app:rightTitle="@{viewModel.state.rightButtonText}"
+                app:rightTitleVisibility="@{false}"
+                app:titleString="@{viewModel.state.toolbarTitle}"
+                app:titleVisibility="@{!viewModel.state.toolbarTitle.isEmpty()}" />
+
+
+            <co.yap.widgets.CoreCircularImageView
+                android:id="@+id/ivFlag"
+                android:layout_width="@dimen/_64sdp"
+                android:layout_height="@dimen/_64sdp"
+                android:layout_marginTop="@dimen/margin_large"
+                android:src="@drawable/flag_ca"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/toolbar"
+                app:setFlagDrawable="@{viewModel.state.countryCode}" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvCountryName"
+                style="@style/Title3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:text="@{viewModel.state.name}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivFlag"
+                tools:text="Canada" />
+
+            <co.yap.widgets.CoreButton
+                android:id="@+id/btnSendMoney"
+                style="@style/RectangleBtnSmallStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_normal"
+                android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+                app:btn_enable="true"
+                app:btn_size="mini_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvCountryName"
+                app:text="@{Strings.screen_send_money_home_display_text_send_money}"
+                tools:text="@string/screen_send_money_home_display_text_send_money" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/containerCurrency"
+                android:visibility="@{viewModel.state.showExchangeRate ? View.VISIBLE : View.GONE}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_marginTop="@dimen/margin_medium_large"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:layout_marginBottom="@dimen/margin_normal"
+                android:background="@drawable/cornor_edges_grey_less_radius"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/margin_normal"
+                android:paddingTop="@dimen/margin_normal"
+                android:paddingEnd="@dimen/margin_normal_large"
+                android:paddingBottom="@dimen/margin_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/btnSendMoney">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCurrencyLabel"
+                    style="@style/AMicroGrey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@{`1 `+viewModel.state.homeCountryCurrency+` = `}"
+                    tools:text="1 INR = " />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvConversionRate"
+                    style="@style/Title2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.state.rate}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvCurrencyLabel"
+                    tools:text="0.357014" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCurrencySymbol"
+                    style="@style/AMicro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_extra_small"
+                    android:layout_marginBottom="@dimen/margin_extra_small"
+                    android:text="@{SessionManager.INSTANCE.defaultCurrency}"
+                    app:layout_constraintBottom_toBottomOf="@+id/tvConversionRate"
+                    app:layout_constraintStart_toEndOf="@id/tvConversionRate"
+                    tools:text="AED" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCurrentTime"
+                    style="@style/AMicroGrey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{viewModel.state.time}"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvConversionRate"
+                    tools:text="04/10/2020, 2:30 PM" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_home_country_graph"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvCurrencySymbol"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <LinearLayout
+                android:id="@+id/llRecentsParent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:animateLayoutChanges="true"
+                android:orientation="vertical"
+                android:visibility="@{viewModel.state.isNoRecentsBeneficiries ? View.GONE : View.VISIBLE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/containerCurrency">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/recentsContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_12sdp">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/recents"
+                        style="@style/AppFontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/margin_medium"
+                        android:enabled="@{viewModel.state.isRecentsVisible?true:false}"
+                        android:lineSpacingExtra="6sp"
+                        android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+                        android:padding="@dimen/small"
+                        android:text="@{viewModel.state.isRecentsVisible == false ? @string/screen_y2y_display_text_recent_transfer : @string/common_display_text_show_recent_transfer}"
+                        android:textColor="@{viewModel.state.isRecentsVisible == false? @color/greyDark : @color/colorPrimary}"
+                        android:textSize="12sp"
+                        android:textStyle="normal"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:text="@string/screen_y2y_display_text_recent_transfer" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvHideRecents"
+                        style="@style/AppFontRegular"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="end"
+                        android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+                        android:padding="@dimen/small"
+                        android:text="Hide"
+                        android:textColor="?attr/colorPrimaryAttr"
+                        android:textSize="12sp"
+                        android:visibility="@{viewModel.state.isRecentsVisible ? View.GONE : View.VISIBLE}"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.93"
+                        app:layout_constraintStart_toEndOf="@+id/recents"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:textColor="@color/colorPrimary" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerViewRecents"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/margin_medium_large"
+                    android:orientation="horizontal"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:recycleViewAdapter="@{viewModel.recentsAdapter}"
+                    tools:itemCount="10"
+                    tools:listitem="@layout/item_core_recent_beneficiary" />
+
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvBenefits"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_small"
+                android:orientation="vertical"
+                android:nestedScrollingEnabled="true"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/llRecentsParent"
+                app:layout_constraintVertical_bias="0.0"
+                app:recycleViewAdapter="@{viewModel.benefitsAdapter}"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_home_country_benefits" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvChangeHomeCountry"
+                style="@style/ALarge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_large"
+                android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+                android:textColor="?attr/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/rvBenefits"
+                app:layout_constraintVertical_bias="1.0"
+                app:text="@{Strings.screen_send_money_home_display_text_change_home_country}"
+                tools:text="@string/screen_send_money_home_display_text_change_home_country"
+                tools:textColor="@color/colorPrimary" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

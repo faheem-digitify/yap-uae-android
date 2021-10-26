@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.widgets.scanqrcode.ScanQRCodeViewModel" />
+
+        <import type="co.yap.translation.Strings" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clMain"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.dlazaro66.qrcodereaderview.QRCodeReaderView
+            android:id="@+id/qrCodeReaderView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivOverLay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivBack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_small"
+            android:onClick="@{viewModel::onToolBarClick}"
+            android:src="@drawable/ic_close_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvQrCode"
+            android:layout_width="@dimen/_200sdp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvScanToProceed"
+            style="@style/Regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/_135sdp"
+            android:background="@drawable/cornor_edges_black"
+            android:gravity="center"
+            android:paddingTop="@dimen/_2sdp"
+            android:paddingBottom="@dimen/_2sdp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:text="@{Strings.screen_fragment_yap_it_qr_code_text_scan_to_proceed}"
+            tools:text="@string/screen_fragment_yap_it_qr_code_text_scan_to_proceed" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivLibrary"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/margin_xl"
+            android:layout_marginEnd="@dimen/margin_large"
+            android:onClick="@{viewModel::onToolBarClick}"
+            app:layout_constraintEnd_toEndOf="@id/tvScanToProceed"
+            app:layout_constraintTop_toBottomOf="@id/tvScanToProceed"
+            app:srcCompat="@drawable/ic_image_library" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvImageLibrary"
+            style="@style/Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:gravity="center"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/ivLibrary"
+            app:layout_constraintStart_toStartOf="@id/ivLibrary"
+            app:layout_constraintTop_toBottomOf="@id/ivLibrary"
+            app:text="@{Strings.screen_fragment_yap_it_qr_code_text_image_library}"
+            tools:text="@string/screen_fragment_yap_it_qr_code_text_image_library" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivMyQrCode"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginStart="@dimen/margin_extra_large"
+            android:layout_marginTop="@dimen/margin_xl"
+            android:onClick="@{viewModel::onToolBarClick}"
+            app:layout_constraintStart_toStartOf="@id/tvScanToProceed"
+            app:layout_constraintTop_toBottomOf="@id/tvScanToProceed"
+            app:srcCompat="@drawable/ic_my_qr_code" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMyQrCode"
+            style="@style/Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:gravity="center"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="@id/ivMyQrCode"
+            app:layout_constraintStart_toStartOf="@id/ivMyQrCode"
+            app:layout_constraintTop_toBottomOf="@id/ivMyQrCode"
+            app:text="@{Strings.screen_fragment_yap_it_qr_code_text_my_qr_code}"
+            tools:text="@string/screen_fragment_yap_it_qr_code_text_my_qr_code" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

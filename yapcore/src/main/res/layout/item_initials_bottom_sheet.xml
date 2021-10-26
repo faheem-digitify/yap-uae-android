@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.widgets.bottomsheet.CoreBottomSheetItemViewModel" />
+
+        <import type="co.yap.translation.Strings" />
+
+        <import type="android.view.View" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/margin_small">
+
+        <co.yap.widgets.CoreCircularImageView
+            android:id="@+id/ivSignedUpUser"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:contentDescription="@string/empty_string"
+            app:fullName="@{viewModel.itemBottomSheet.content}"
+            app:imageUrl="@{``}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:position="@{viewModel.position}"
+            tools:src="@drawable/ic_store_b2b" />
+
+        <TextView
+            android:id="@+id/tvName"
+            style="@style/Regular"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:ellipsize="end"
+            android:lineSpacingExtra="0dp"
+            android:lines="2"
+            app:layout_constraintStart_toEndOf="@+id/ivSignedUpUser"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{viewModel.itemBottomSheet.content}"
+            tools:text="Sufyan Shabbir" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

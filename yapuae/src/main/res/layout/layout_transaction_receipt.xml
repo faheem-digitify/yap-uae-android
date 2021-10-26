@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+        <import type="co.yap.translation.Strings" />
+
+        <variable
+            name="receiptViewModel"
+            type="co.yap.modules.dashboard.transaction.detail.TransactionDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clReciptParent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vLine">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clRecipt"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:onClick="@{(v)-> receiptViewModel.handlePressOnView(v.id)}"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/clReciptIcon"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_marginTop="@dimen/margin_normal_large"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:background="@drawable/bg_round_purple_enabled"
+                android:contentDescription="@string/empty_string"
+                android:padding="@dimen/margin_small"
+                android:src="@drawable/ic_recipt"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+            <TextView
+                android:id="@+id/tvReciptHeading"
+                style="@style/Small"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@{receiptViewModel.state.receiptTitle}"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginStart="@dimen/margin_medium"
+                app:layout_constraintStart_toEndOf="@+id/clReciptIcon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/margin_normal_large"
+                tools:text="@string/screen_transaction_details_receipt_label"
+                />
+
+            <TextView
+                android:id="@+id/tvReciptDetails"
+                style="@style/AMicroGrey"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:lineSpacingExtra="2dp"
+                android:maxLines="1"
+                app:text="@{Strings.screen_transaction_details_receipt_text}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/tvReciptHeading"
+                app:layout_constraintTop_toBottomOf="@+id/tvReciptHeading"
+                tools:text="transaction receipt" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/margin_normal"
+                android:layout_marginTop="@dimen/margin_extra_small"
+                app:adapter="@{receiptViewModel.adapter}"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.33"
+                app:layout_constraintStart_toStartOf="@+id/tvReciptDetails"
+                app:layout_constraintTop_toBottomOf="@+id/tvReciptDetails"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_transection_recipt" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

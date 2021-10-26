@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.yapit.sendmoney.landing.viewmodels.SendMoneyDashboardViewModel" />
+
+        <import type="co.yap.yapuae.R" />
+        <import type="android.view.View" />
+        <import type="co.yap.translation.Strings" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
+
+        <co.yap.widgets.CoreToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:leftIcon="@{R.drawable.ic_closeicon}"
+            app:rightIconVisibility="@{true}"
+            app:onClick="@{viewModel::onToolBarClick}"
+            app:rightIcon="@{R.drawable.ic_user_search}"
+            app:titleString="@{viewModel.state.toolbarTitle}" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            style="@style/Large"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar"
+            app:text="@{Strings.screen_fragment_yap_it_send_money_label}"
+            tools:text="@string/screen_fragment_yap_it_send_money_label" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal_large"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:visibility="@{viewModel.state.isNoRecents ? View.GONE : View.VISIBLE}"
+            android:layout_marginEnd="@dimen/margin_normal_large">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvrecentTransfer"
+                style="@style/SmallGrey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:enabled="@{viewModel.state.isRecentsVisible}"
+                android:onClick="@{(v)->viewModel.handlePressOnView(v.id)}"
+                android:paddingTop="@dimen/margin_small"
+                android:paddingEnd="@dimen/margin_small"
+                android:paddingBottom="@dimen/margin_small"
+                android:textColor="@{viewModel.state.isRecentsVisible == false ? @color/greyDark: @color/colorPrimary}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:text="@{viewModel.state.isRecentsVisible == false ? Strings.screen_send_money_display_text_recent_transfer : Strings.screen_send_show_recent }"
+                tools:text="@string/screen_send_money_display_text_recent_transfer" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/hiderecentext"
+                style="@style/SmallGrey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_normal_large"
+                android:onClick="@{(v)->viewModel.handlePressOnView(v.id)}"
+                android:paddingStart="@dimen/margin_small"
+                android:paddingTop="@dimen/margin_small"
+                android:paddingBottom="@dimen/margin_small"
+                android:textColor="@color/colorPrimary"
+                android:visibility="@{viewModel.state.isRecentsVisible== false ? View.VISIBLE : View.GONE}"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:text="@{Strings.screen_send_money_home_display_text_hide}"
+                tools:text="@string/screen_send_money_home_display_text_hide" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ViewStub
+            android:id="@+id/vsRecentBeneficiaries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal_large"
+            android:layout_marginEnd="@dimen/margin_normal_large"
+            android:inflatedId="@+id/content_import"
+            android:layout="@layout/layout_recent_beneficiaries_recylcerview"
+            app:adapter="@{viewModel.recentsAdapter}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/showrecentext" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:dividerHeight="2dp"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vsRecentBeneficiaries"
+            app:recycleViewAdapter="@{viewModel.dashboardAdapter}"
+            app:spanCount="2"
+            tools:itemCount="7"
+            tools:listitem="@layout/item_yap_it_send_money_landing" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

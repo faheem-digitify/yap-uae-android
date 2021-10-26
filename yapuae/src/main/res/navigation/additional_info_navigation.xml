@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/additional_info_navigation"
+    app:startDestination="@id/additionalInfoStartFragment">
+    <fragment
+        android:id="@+id/selectDocumentFragment"
+        android:name="co.yap.modules.dashboard.addionalinfo.fragments.SelectDocumentFragment"
+        android:label="SelectDocumentFragment"
+        tools:layout="@layout/fragment_select_document">
+
+        <action
+            android:id="@+id/action_selectDocumentFragment_to_additionalInfoEmployment"
+            app:destination="@id/additionalInfoEmployment" />
+        <action
+            android:id="@+id/action_selectDocumentFragment_to_additionalInfoQuestion"
+            app:destination="@id/additionalInfoQuestion" />
+        <action
+            android:id="@+id/action_selectDocumentFragment_to_additionalInfoComplete"
+            app:destination="@id/additionalInfoComplete" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/additionalInfoEmployment"
+        android:name="co.yap.modules.dashboard.addionalinfo.fragments.AdditionalInfoEmploymentFragment"
+        android:label="AdditionalInfoEmployment"
+        tools:layout="@layout/fragment_additional_info_employment">
+
+        <action
+            android:id="@+id/action_additionalInfoEmployment_to_additionalInfoQuestion"
+            app:destination="@id/additionalInfoQuestion" />
+        <action
+            android:id="@+id/action_additionalInfoEmployment_to_additionalInfoComplete"
+            app:destination="@id/additionalInfoComplete" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/additionalInfoQuestion"
+        android:name="co.yap.modules.dashboard.addionalinfo.fragments.AdditionalInfoQuestionFragment"
+        android:label="AdditionalInfoQuestion"
+        tools:layout="@layout/fragment_additional_info_question" >
+        <action
+            android:id="@+id/action_additionalInfoQuestion_to_additionalInfoComplete"
+            app:destination="@id/additionalInfoComplete" />
+    </fragment>
+    <fragment
+        android:id="@+id/additionalInfoStartFragment"
+        android:name="co.yap.modules.dashboard.addionalinfo.fragments.AdditionalInfoStartFragment"
+        android:label="AdditionalInfoStart"
+        tools:layout="@layout/fragment_additional_info_start">
+        <action
+            android:id="@+id/action_additionalInfoStartFragment_to_selectDocumentFragment"
+            app:destination="@id/selectDocumentFragment" />
+        <action
+            android:id="@+id/action_additionalInfoStartFragment_to_additionalInfoQuestion"
+            app:destination="@id/additionalInfoQuestion" />
+        <action
+            android:id="@+id/action_additionalInfoStartFragment_to_additionalInfoComplete"
+            app:destination="@id/additionalInfoComplete" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/additionalInfoComplete"
+        android:name="co.yap.modules.dashboard.addionalinfo.fragments.AdditionalInfoCompleteFragment"
+        android:label="AdditionalInfoCompleteFragment"
+        tools:layout="@layout/fragment_additional_info_complete">
+
+    </fragment>
+
+</navigation>

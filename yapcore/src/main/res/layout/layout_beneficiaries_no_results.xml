@@ -1,0 +1,10 @@
+<androidx.appcompat.widget.AppCompatTextView xmlns:android="http://schemas.android.com/apk/res/android"
+   android:id="@+id/tvNoresult"
+    style="@style/LargeGrey"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center|top"
+    android:text="@string/empty_view_text"
+    android:layout_marginTop="@dimen/_66sdp"
+    android:textColor="@color/greyDark"
+    />

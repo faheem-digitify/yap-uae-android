@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.more.notifications.home.NotificationItemViewModel" />
+
+        <import type="android.view.View" />
+
+        <import type="android.graphics.Typeface" />
+
+        <import type="co.yap.translation.Strings" />
+
+        <import type="co.yap.yapcore.R" />
+
+        <import type="co.yap.yapcore.helpers.DateUtils" />
+
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/flSwipeable"
+            android:layout_width="@dimen/_66sdp"
+            android:layout_height="@dimen/_62sdp"
+            android:layout_gravity="end|center_vertical"
+            android:visibility="gone"
+            tools:visibility="visible">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDelete"
+                style="@style/Micro"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:background="@color/colorSecondaryMagenta"
+                android:drawableTop="@drawable/ic_close_dark"
+                android:drawablePadding="@dimen/_2sdp"
+                android:drawableTint="@color/white"
+                android:gravity="center"
+                android:onClick="@{(view) -> viewModel.onDeleteClick(view)}"
+                android:paddingStart="@dimen/margin_medium"
+                android:paddingTop="@dimen/margin_normal"
+                android:paddingEnd="@dimen/margin_medium"
+                android:paddingBottom="@dimen/margin_normal"
+                android:textColor="@color/white"
+                app:drawableTint="@color/white"
+                app:text="@{Strings.common_button_delete}"
+                tools:text="Delete" />
+        </FrameLayout>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/foregroundContainer"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_62sdp"
+            android:layout_gravity="center_vertical"
+            android:background="@color/white"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/margin_medium_large"
+            android:paddingTop="@dimen/margin_normal"
+            android:paddingEnd="@dimen/margin_medium_large"
+            android:paddingBottom="@dimen/margin_normal">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/imgProfile"
+                android:layout_width="@dimen/_35sdp"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_gravity="center"
+                app:imageSize="@{R.dimen._35sdp}"
+                android:contentDescription="@string/empty_string"
+                app:bgColor="@{R.color.bg_round_light_green}"
+                app:fullName="@{viewModel.item.fullName}"
+                app:imageUrl="@{viewModel.item.profilePicUrl}"
+                app:initialTextColor="@{R.color.colorDarkAqua}"
+                app:initialTextSize="@{R.dimen.text_size_h3}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/circleImageView"
+                app:srcCompatGif="@{viewModel.item.imgResId}"
+                tools:text="@drawable/ic_bank" />
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/content"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_medium"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvName"
+                    style="@style/Small"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:gravity="bottom"
+                    android:lineSpacingExtra="0dp"
+                    android:lines="1"
+                    android:text="@{viewModel.item.title == null || viewModel.item.title.empty ?viewModel.item.description:viewModel.item.title}"
+                    android:textSize="@dimen/text_size_h3"
+                    android:typeface="@{Typeface.defaultFromStyle(viewModel.item.isRead?Typeface.NORMAL: Typeface.BOLD)}"
+                    tools:text="Bril Lizzie Hugsadsadflksjdflkjsalk,nmbmfdjlsajfdllsjdflksjdflkjlsdfjklksdjfkljsdfalkfjaskljflkasfjlkasdjlfjfjlkasdfjklhes" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDate"
+                    style="@style/SmallGrey"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:lines="1"
+                    android:text="@{DateUtils.INSTANCE.getFormattedLogDate(context,viewModel.item.createdAt,DateUtils.INSTANCE.SERVER_DATE_FORMAT,DateUtils.INSTANCE.LEAN_PLUM_FORMAT,DateUtils.INSTANCE.UTC,DateUtils.INSTANCE.TIME_ZONE_Default)}"
+                    android:textColor="@color/greyNormalDark"
+                    android:textSize="@dimen/text_size_h3"
+                    tools:text="01 July, 2019" />
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </FrameLayout>
+</layout>

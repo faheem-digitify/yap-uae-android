@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+
+        <import type="co.yap.translation.Strings" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="co.yap.sendmoney.viewmodels.SMSearchBeneficiaryViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/lySearchView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_normal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etSearch"
+                style="@style/ASmall"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_weight="3"
+                android:background="@drawable/bg_search_widget"
+                android:drawableStart="@drawable/ic_search_grey"
+                android:drawablePadding="@dimen/small"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:hint="Search beneficiaries"
+                android:imeOptions="actionSearch"
+                android:inputType="textFilter"
+                android:maxLines="1"
+                android:paddingStart="@dimen/margin_small"
+                android:paddingEnd="@dimen/margin_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:requestKeyboard="@{true}" />
+
+            <TextView
+                android:id="@+id/tvCancel"
+                style="@style/ASmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_weight="0.5"
+                android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+                android:text="@string/common_button_cancel"
+                android:textColor="?attr/colorPrimaryAttr"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@id/layoutSearchView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/layoutSearchView"
+                app:layout_constraintTop_toTopOf="@id/layoutSearchView"
+                tools:textColor="@color/colorPrimary" />
+        </LinearLayout>
+
+        <co.yap.widgets.MultiStateView
+            android:id="@+id/multiStateView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lySearchView"
+            app:emptyViewText="@{@string/common_display_text_no_results}"
+            app:msv_emptyView="@layout/layout_beneficiaries_no_results"
+            app:msv_errorView="@layout/layout_beneficiaries_no_results"
+            app:msv_viewState="content">
+
+            <co.yap.widgets.skeletonlayout.ShimmerRecyclerView
+                android:id="@+id/rvAllBeneficiaries"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="visible"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:recycleViewAdapter="@{viewModel.adapter}"
+                tools:listitem="@layout/layout_item_beneficiary"
+                tools:itemCount="1"
+                tools:visibility="visible"
+                app:shimmerLayoutId="@layout/layout_item_beneficiary_shimmer"
+                app:itemCount = "@integer/skeleton_layout_item_count"
+                app:rvAdapter="@{viewModel.adapter}" />
+        </co.yap.widgets.MultiStateView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

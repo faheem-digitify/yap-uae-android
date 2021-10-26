@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.location.kyc_additional_info.employment_info.questionnaire.adapter.QuestionnaireItemViewModel" />
+
+        <import type="android.view.View" />
+
+        <import type="co.yap.translation.Strings" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/clQuestionTypeEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/lyTinNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/margin_small"
+            android:gravity="center_vertical"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTinNumber"
+                style="@style/SmallGrey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:lineSpacingExtra="2sp"
+                android:text="@{viewModel.questionUiFields.question.questionTitle}"
+                android:textColor="@color/darkSlateBlue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_reasons"
+                tools:text="Tell us the name of your company?" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etQuestionEditText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:background="@null"
+                android:gravity="bottom"
+                android:hint="@{viewModel.questionUiFields.question.placeholder}"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:maxLength="@{250}"
+                android:digits="1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ "
+                android:lines="1"
+                android:maxLines="1"
+                android:paddingTop="@dimen/margin_extra_small"
+                android:paddingEnd="@dimen/margin_extra_small"
+                android:paddingBottom="@dimen/margin_extra_small"
+                android:singleLine="true"
+                android:text="@={viewModel.questionUiFields.question.answer}"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorPrimaryDark"
+                android:textSize="@dimen/text_size_h3" />
+
+            <include
+                layout="@layout/content_input_field_selector"
+                app:isFocus="@{viewModel.questionUiFields.isFocusInput}" />
+
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

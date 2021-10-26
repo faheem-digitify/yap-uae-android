@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="categoryViewModel"
+            type="co.yap.modules.dashboard.transaction.detail.TransactionDetailsViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <co.yap.widgets.CoreCircularImageView
+            android:id="@+id/ivEatingOut"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:contentDescription="@string/empty_string"
+            app:fullName="@{categoryViewModel.state.updatedCategory.categoryName==null?`General`:categoryViewModel.state.updatedCategory.categoryName}"
+            app:imageDrawable="@{categoryViewModel.state.updatedCategory.categoryName ==`General` || categoryViewModel.state.updatedCategory.categoryName==null ? @drawable/ic_category_general :null}"
+            app:imageUrl="@{categoryViewModel.state.updatedCategory.categoryIcon ?? ` `}"
+            app:isBackground="@{true}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvEatingOut"
+            style="@style/DarkSlateBlue"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:text="@{categoryViewModel.state.updatedCategory.categoryName == null?`General`:categoryViewModel.state.updatedCategory.categoryName}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ivEatingOut"
+            app:layout_constraintTop_toTopOf="@+id/ivEatingOut" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTapToChange"
+            style="@style/MicroGrey"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:enabled="@{categoryViewModel.state.updatedCategory.categoryName != `General`}"
+            android:onClick="@{(v)-> categoryViewModel.handlePressOnView(v.id)}"
+            android:paddingBottom="@dimen/margin_small"
+            android:text="@{categoryViewModel.state.categoryDescription}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvEatingOut"
+            app:layout_constraintTop_toBottomOf="@+id/tvEatingOut" />
+
+        <View
+            android:id="@+id/vLine"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/margin_small"
+            android:background="@color/divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvEatingOut"
+            app:layout_constraintTop_toBottomOf="@id/tvTapToChange" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

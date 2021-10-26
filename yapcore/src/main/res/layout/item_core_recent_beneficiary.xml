@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.widgets.recent_transfers.CoreRecentBeneficiaryItemViewModel" />
+
+        <import type="co.yap.yapcore.helpers.StringUtils" />
+
+        <import type="co.yap.yapcore.R" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_extra_small"
+        android:background="@color/white">
+
+        <co.yap.widgets.CoreCircleView
+            android:id="@+id/coreView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fullName="@{viewModel.coreRecentBeneficiary.name}"
+            app:imageUrl="@{viewModel.coreRecentBeneficiary.profilePictureUrl}"
+            app:layout_constraintBottom_toTopOf="@+id/tvTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            style="@style/MicroGrey"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="0sp"
+            android:lines="2"
+            android:text="@{viewModel.coreRecentBeneficiary.name}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/coreView"
+            app:layout_constraintStart_toStartOf="@+id/coreView"
+            tools:text="Arshad Ali hussain mirza" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

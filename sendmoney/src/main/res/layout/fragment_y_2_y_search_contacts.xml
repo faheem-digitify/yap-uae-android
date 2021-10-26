@@ -1,0 +1,99 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.sendmoney.y2y.home.viewmodel.Y2YSearchContactsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/lySearchView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:padding="@dimen/margin_normal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etSearch"
+                style="@style/ASmall"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_weight="3"
+                android:background="@drawable/bg_search_widget"
+                android:drawableStart="@drawable/ic_search_grey"
+                android:drawablePadding="@dimen/small"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:hint="Search beneficiaries"
+                android:imeOptions="actionSearch"
+                android:inputType="textFilter"
+                android:maxLines="1"
+                android:paddingStart="@dimen/margin_small"
+                android:paddingEnd="@dimen/margin_small"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:requestKeyboard="@{true}" />
+
+            <TextView
+                android:id="@+id/tvCancel"
+                style="@style/ASmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+                android:text="@string/common_button_cancel"
+                android:textColor="?attr/colorPrimaryAttr"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@id/layoutSearchView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/layoutSearchView"
+                app:layout_constraintTop_toTopOf="@id/layoutSearchView"
+                tools:textColor="@color/colorPrimary" />
+        </LinearLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/margin_normal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/lySearchView"
+            app:tabBackground="@drawable/contacts_tab_layout_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"
+            app:tabMode="fixed"
+            app:setupWithViewPager="@{viewPager}"
+            app:tabPaddingEnd="16dp"
+            app:tabRippleColor="@null"
+            app:tabTextAppearance="@style/TabTextAppearance" />
+
+        <co.yap.yapcore.helpers.CustomViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

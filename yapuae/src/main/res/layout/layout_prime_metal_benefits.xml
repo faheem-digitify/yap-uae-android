@@ -1,0 +1,45 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.store.cardplans.viewmodels.PrimeMetalCardViewModel" />
+
+        <import type="co.yap.yapcore.constants.Constants" />
+    </data>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <include
+                android:layout_marginTop="@dimen/margin_extra_large"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/cardPlanstext"
+                layout="@layout/layout_card_plans_header"
+                app:description='@{viewModel.state.cardPlans.description}'
+                app:icon="@{viewModel.state.cardPlans.id.equals(Constants.INSTANCE.PRIME_CARD_PLAN) ?@drawable/ic_prime_card_small:@drawable/ic_metal_card_small}"
+                app:title='@{viewModel.state.cardPlans.title}' />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvCardplans"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_medium"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/margin_medium_large"
+                android:paddingEnd="@dimen/margin_medium_large"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@+id/cardPlanstext"
+                app:recycleViewAdapter="@{viewModel.planBenefitsAdapter}"
+                tools:itemCount="6"
+                tools:listitem="@layout/item_card_benefits" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>

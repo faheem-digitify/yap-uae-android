@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.location.viewmodels.LocationViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_44sdp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:visibility="@{viewModel.state.toolbarVisibility? View.VISIBLE : View.GONE }">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/tbBtnBack"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:contentDescription="@string/empty_string"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+            android:paddingStart="@dimen/margin_small"
+            android:paddingEnd="@dimen/margin_small"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_back" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/tbBtnCheck"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:clickable="true"
+            android:contentDescription="@string/empty_string"
+            android:focusable="true"
+            android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+            app:enabled="@{false}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tbBtnBack"
+            app:srcCompat="@drawable/ic_tick" />
+
+        <co.yap.widgets.AnimatingProgressBar
+            android:id="@+id/tbProgressBar"
+            style="@style/YAPProgressBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_5sdp"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/_14sdp"
+            android:layout_marginEnd="@dimen/_14sdp"
+            android:layout_toStartOf="@id/tbBtnCheck"
+            android:layout_toEndOf="@id/tbBtnBack"
+            android:max="@{viewModel.state.totalProgress}"
+            android:progress="@{viewModel.state.currentProgress}" />
+    </RelativeLayout>
+</layout>

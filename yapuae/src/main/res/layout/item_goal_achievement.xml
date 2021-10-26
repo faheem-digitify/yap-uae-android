@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.more.yapforyou.itemviewmodels.AchievementGoalItemViewModel" />
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/small">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivGoalState"
+            android:layout_width="@dimen/_34sdp"
+            android:layout_height="@dimen/_34sdp"
+            android:layout_marginStart="@dimen/margin_medium_large"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:src="@{viewModel.goal.locked? @drawable/ic_goal_locked : viewModel.goal.completed? @drawable/ic_checked_icon : @drawable/empty_circle}"
+            tools:src="@drawable/ic_goal_locked" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            style="@style/ASmall"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:text="@{viewModel.goal.title}"
+            android:gravity="center_vertical"
+            android:alpha="@{viewModel.goal.locked ? 0.44f : 1f}"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:textSize="@dimen/_12sdp"
+            app:layout_constraintBottom_toBottomOf="@id/ivGoalState"
+            app:layout_constraintStart_toEndOf="@+id/ivGoalState"
+            app:layout_constraintTop_toTopOf="@id/ivGoalState"
+            android:textColor="?attr/colorPrimaryAttr"
+            tools:textColor="@color/colorPrimary"
+            tools:text="Send money to someone outside YAP" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="co.yap.yapuae.R" />
+
+        <import type="android.view.View" />
+
+        <import type="co.yap.yapcore.managers.SessionManager" />
+
+        <import type="co.yap.translation.Strings" />
+
+        <variable
+            name="purchaseViewModel"
+            type="co.yap.modules.dashboard.transaction.detail.TransactionDetailsViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flowTop"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:constraint_referenced_ids="tpTopLine,space,tpBaseLine,flow2,vBlank"
+            app:flow_verticalGap="@dimen/margin_medium"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/tpTopLine"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/colorDisabledBtn" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tpTitle"
+            style="@style/ALarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+            android:text="@{purchaseViewModel.totalPurchase.txnCount.toString()== null ? `0` :purchaseViewModel.totalPurchase.txnCount.toString()}"
+            android:textColor="@color/colorPrimary"
+            app:layout_constraintBottom_toTopOf="@+id/tpBaseLine"
+            app:layout_constraintEnd_toStartOf="@+id/ivTotalPurchase"
+            app:layout_constraintTop_toBottomOf="@+id/tpTopLine"
+            tools:text="32" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivTotalPurchase"
+            android:layout_width="@dimen/_26sdp"
+            android:layout_height="@dimen/_26sdp"
+            android:tint="@color/colorPrimary"
+            android:scaleType="fitXY"
+            android:alpha="0.3"
+            android:clickable="false"
+            app:layout_constraintBottom_toBottomOf="@+id/tpTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tpTitle"
+            app:srcCompat="@drawable/ic_chevron_right" />
+<!--        android:onClick="@{(v)->purchaseViewModel.handlePressOnView(v.id)}"-->
+
+        <View
+            android:id="@+id/space"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_4sdp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tpCount"
+            style="@style/ASmallGrey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total transactions"
+            android:textColor="@color/colorPrimaryDark"
+            app:layout_constraintBottom_toTopOf="@+id/tpBaseLine"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tpTopLine" />
+
+        <View
+            android:id="@+id/tpBaseLine"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/colorDisabledBtn" />
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/flow2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:constraint_referenced_ids="average,tpDevider,total"
+            app:flow_verticalGap="@dimen/margin_medium"
+            app:layout_constraintTop_toBottomOf="@+id/flowTop" />
+
+        <include
+            android:id="@+id/average"
+            layout="@layout/layout_average_total"
+            app:currency='@{SessionManager.INSTANCE.defaultCurrency}'
+            app:price='@{purchaseViewModel.totalPurchase.avgSpendAmount.toString()== null ?`0.00` :purchaseViewModel.totalPurchase.avgSpendAmount.toString()}'
+            app:title='@{"Average"}' />
+
+        <View
+            android:id="@+id/tpDevider"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="@dimen/margin_xl"
+            android:background="@color/colorDisabledBtn" />
+
+        <include
+            android:id="@+id/total"
+            layout="@layout/layout_average_total"
+            app:currency='@{SessionManager.INSTANCE.defaultCurrency}'
+            app:price='@{purchaseViewModel.totalPurchase.totalSpendAmount.toString()== null ?`0.00` :purchaseViewModel.totalPurchase.totalSpendAmount.toString()}'
+            app:title='@{"Total"}' />
+
+        <View
+            android:id="@+id/vBlank"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/margin_small" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

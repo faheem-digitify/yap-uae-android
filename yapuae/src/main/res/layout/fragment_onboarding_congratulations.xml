@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="co.yap.translation.Strings" />
+
+        <import type="android.view.View" />
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.onboarding.viewmodels.CongratulationsViewModel" />
+    </data>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/rootContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:background="@color/white">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTitle"
+            style="@style/ATitle3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_extra_small"
+            android:ellipsize="marquee"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:gravity="center"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:scrollHorizontally="true"
+            android:singleLine="true"
+            app:concat="@{viewModel.state.nameList}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:selected="@{true}"
+            app:text="@{Strings.screen_onboarding_congratulations_display_text_title}"
+            tools:text="@string/screen_onboarding_congratulations_display_text_title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvSubTitle"
+            style="@style/ASmallGrey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_medium"
+            android:layout_marginTop="@dimen/margin_medium"
+            android:layout_marginEnd="@dimen/margin_medium"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+            app:text="@{Strings.screen_onboarding_congratulations_display_text_sub_title_no_interval}"
+            tools:text="@string/screen_onboarding_congratulations_display_text_sub_title_no_interval" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/ivCard"
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/margin_small"
+            android:src="@drawable/card_spare"
+            app:layout_constraintBottom_toTopOf="@+id/tvIbanTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvSubTitle" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvIbanTitle"
+            style="@style/MicroGrey"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:gravity="center"
+            android:text="@string/screen_onboarding_congratulations_display_text_iban"
+            android:visibility="@{viewModel.state.waiting ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/tvIban"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/ivCard"
+            app:text="@{Strings.screen_onboarding_congratulations_display_text_iban}" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvIban"
+            style="@style/ARegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:background="@drawable/bg_round_edit_text_general"
+            android:gravity="center"
+            android:paddingStart="@dimen/_20sdp"
+            android:paddingTop="@dimen/_12sdp"
+            android:paddingEnd="@dimen/_20sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:text="@{viewModel.state.ibanNumber}"
+            android:textColor="?attr/colorPrimaryAttr"
+            android:visibility="@{viewModel.state.waiting ? View.GONE : View.VISIBLE}"
+            app:layout_constraintBottom_toTopOf="@+id/tvMeetingNotes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="AE07 0331 2345 6789 01** ***" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvMeetingNotes"
+            style="@style/MicroGrey"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_normal"
+            android:layout_marginEnd="@dimen/margin_normal"
+            android:layout_marginBottom="@dimen/margin_medium"
+            android:gravity="center"
+            app:layout_constraintBottom_toTopOf="@+id/btnCompleteVerification"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:text="@{viewModel.state.waiting ? Strings.screen_onboarding_congratulations_display_text_delay_detail_text:Strings.screen_onboarding_congratulations_display_text_meeting_note}"
+            tools:text="@string/screen_onboarding_congratulations_display_text_meeting_note" />
+
+        <co.yap.widgets.CoreButton
+            android:id="@+id/btnCompleteVerification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_extra_large"
+            android:drawablePadding="@dimen/_20sdp"
+            android:gravity="center"
+            android:onClick="@{(v)-> viewModel.handlePressOnCompleteVerification(v.id)}"
+            android:textColor="@color/colorWhite"
+            app:btn_enable="true"
+            app:btn_round_radius="@dimen/_26sdp"
+            app:btn_shape_type="rectangle"
+            app:btn_size="medium"
+            app:btn_text_size="@dimen/text_size_h4"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:text="@{viewModel.state.waiting ? Strings.screen_onboarding_congratulations_button_queue_up:Strings.screen_onboarding_congratulations_button_complete_verification }"
+            tools:text="@string/screen_onboarding_congratulations_button_complete_verification" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

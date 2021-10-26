@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="co.yap.modules.dashboard.more.notifications.details.NotificationDetailsViewModel" />
+
+        <import type="co.yap.translation.Strings" />
+
+        <import type="android.view.View" />
+
+        <import type="co.yap.yapuae.R" />
+
+        <import type="co.yap.yapcore.helpers.DateUtils" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <co.yap.widgets.CoreToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:leftIcon="@{R.drawable.ic_back_arrow_left}"
+            app:leftIconVisibility="@{true}"
+            app:onClick="@{viewModel::onToolBarClick}"
+            app:titleString="@{viewModel.state.notification.title.empty || viewModel.state.notification.title==null?@string/screen_notification_listing_display_text_toolbar_title:viewModel.state.notification.title}" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/red"
+            android:fillViewport="true">
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/rootContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/margin_medium"
+                android:paddingEnd="@dimen/margin_medium">
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivNotificationImage"
+                    android:layout_width="@dimen/_64sdp"
+                    android:layout_height="@dimen/_64sdp"
+                    android:layout_margin="@dimen/margin_large"
+                    android:contentDescription="@string/empty_string"
+                    app:bgColor="@{R.color.bg_round_light_green}"
+                    app:fullName="@{viewModel.state.notification.firstName + ` ` + viewModel.state.notification.lastName}"
+                    app:imageSize="@{R.dimen._64sdp}"
+                    app:imageUrl="@{viewModel.state.notification.profilePicUrl}"
+                    app:initialTextColor="@{R.color.colorDarkAqua}"
+                    app:initialTextSize="@{R.dimen.text_size_h3}"
+                    app:shapeAppearanceOverlay="@style/circleImageView"
+                    app:srcCompatGif="@{viewModel.state.notification.imgResId}" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDate"
+                    style="@style/SmallGrey"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:gravity="center"
+                    android:text="@{DateUtils.INSTANCE.getFormattedLogDate(context,viewModel.state.notification.createdAt,DateUtils.INSTANCE.SERVER_DATE_FORMAT,DateUtils.INSTANCE.LEAN_PLUM_FORMAT,DateUtils.INSTANCE.UTC,DateUtils.INSTANCE.TIME_ZONE_Default)}"
+                    android:textColor="@color/greyNormalDark"
+                    tools:text="03 July, 2019" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvTitle"
+                    style="@style/ALarge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/small"
+                    android:gravity="center"
+                    android:text="@{viewModel.state.notification.subTitle}"
+                    android:textSize="@dimen/text_size_h6"
+                    android:visibility="@{viewModel.state.notification.subTitle.empty?View.GONE:View.VISIBLE}"
+                    tools:text="Payment Policy Updates" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDescription"
+                    style="@style/ASmallGrey"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/margin_medium"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.state.notification.description}"
+                    tools:text="At Spotify, we want to give you the bred.We are contacting you today to let you know that we will." />
+
+                <co.yap.widgets.CoreButton
+                    android:id="@+id/btnAction"
+                    style="@style/FragmentsBtnStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_large"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:gravity="center"
+                    android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+                    android:text="@{viewModel.state.notification.btnTitle}"
+                    android:visibility="@{viewModel.state.notification.btnTitle.empty ||  viewModel.state.notification.btnTitle==null?View.GONE:View.VISIBLE}"
+                    app:btn_enable="true"
+                    app:btn_size="medium"
+                    tools:text="@string/screen_card_blocked_button_reorder_new_card" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvDeleteNotification"
+                    style="@style/Large"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:foregroundGravity="bottom"
+                    android:gravity="center"
+                    android:onClick="@{(v) -> viewModel.handlePressOnView(v.id)}"
+                    android:padding="@dimen/margin_small"
+                    android:textColor="@color/colorPrimary"
+                    android:visibility="@{viewModel.state.notification.isDeletable?View.VISIBLE:View.GONE}"
+                    app:text="@{Strings.screen_notification_detail_display_text_delete}"
+                    tools:text="@string/screen_notification_detail_display_text_delete" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+        </ScrollView>
+    </LinearLayout>
+</layout>

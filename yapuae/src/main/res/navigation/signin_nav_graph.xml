@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/signin_nav_graph"
+    app:startDestination="@id/loginPasscodeFragment">
+    <action
+        android:id="@+id/action_goto_yapDashboardActivity"
+        app:destination="@id/yapDashboardActivity" />
+
+    <fragment
+        android:id="@+id/loginPasscodeFragment"
+        android:name="co.yap.modules.auth.loginpasscode.VerifyPasscodeFragment"
+        android:label="LoginPasscodeFragment"
+        tools:layout="@layout/fragment_verify_passcode">
+        <action
+            android:id="@+id/action_loginPasscodeFragment_to_loginOTPVerificationFragment"
+            app:destination="@id/loginOTPVerificationFragment" />
+        <action
+            android:id="@+id/action_loginPasscodeFragment_to_biometricPermissionFragment"
+            app:destination="@id/biometricPermissionFragment" />
+        <action
+            android:id="@+id/action_loginPasscodeFragment_to_forgot_passcode_navigation"
+            app:destination="@id/forgot_passcode_navigation"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left">
+            <argument
+                android:name="mobileNumber"
+                app:argType="string" />
+            <argument
+                android:name="token"
+                app:argType="string" />
+
+            <argument
+                android:name="navigationType"
+                android:defaultValue=" "
+                app:argType="string" />
+        </action>
+
+    </fragment>
+    <fragment
+        android:id="@+id/loginOTPVerificationFragment"
+        android:name="co.yap.modules.auth.otpverification.PhoneVerificationSignInFragment"
+        android:label="LoginOTPVerificationFragment"
+        tools:layout="@layout/fragment_login_phone_verification">
+        <argument
+            android:name="username"
+            android:defaultValue=" "
+            app:argType="string" />
+
+        <argument
+            android:name="passcode"
+            android:defaultValue=" "
+            app:argType="string" />
+        <action
+            android:id="@+id/action_loginOTPVerificationFragment_to_biometricPermissionFragment"
+            app:destination="@id/biometricPermissionFragment" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/biometricPermissionFragment"
+        android:name="co.yap.modules.auth.biometric.SystemPermissionFragment"
+        android:label="BiometricPermissionFragment"
+        tools:layout="@layout/fragment_biometric_permission">
+        <argument
+            android:name="screen_type"
+            android:defaultValue=" "
+            app:argType="string" />
+        <action
+            android:id="@+id/action_biometricPermissionFragment_self"
+            app:destination="@id/biometricPermissionFragment" />
+
+    </fragment>
+
+    <include app:graph="@navigation/forgot_passcode_navigation" />
+
+    <activity
+        android:id="@+id/yapDashboardActivity"
+        android:name="co.yap.modules.dashboard.main.activities.YapDashboardActivity"
+        android:label="YapDashboardActivity" />
+
+</navigation>

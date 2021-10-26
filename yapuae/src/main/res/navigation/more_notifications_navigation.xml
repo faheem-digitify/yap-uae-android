@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/more_notifications_navigation"
+    app:startDestination="@id/notificationHomeFragment">
+
+    <fragment
+        android:id="@+id/notificationHomeFragment"
+        android:name="co.yap.modules.dashboard.more.notifications.home.NotificationsHomeFragment"
+        android:label="NotificationHomeFragment"
+        tools:layout="@layout/fragment_notifications_home_v2">
+        <action
+            android:id="@+id/action_notificationHomeFragment_to_notificationDetailFragment"
+            app:destination="@id/notificationDetailFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_notificationHomeFragment_to_notificationSettingsFragment"
+            app:destination="@id/notificationSettingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationDetailFragment"
+        android:name="co.yap.modules.dashboard.more.notifications.details.NotificationDetailsFragment"
+        android:label="NotificationDetailFragment"
+        tools:layout="@layout/fragment_notification_details" />
+    <fragment
+        android:id="@+id/notificationSettingsFragment"
+        android:name="co.yap.modules.dashboard.more.notifications.setting.NotificationSettingsFragment"
+        android:label="NotificationSettingsFragment"
+        tools:layout="@layout/fragment_notification_settings" />
+</navigation>

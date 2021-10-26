@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="homeTransactionGroupItemVM"
+            type="co.yap.modules.dashboard.transaction.search.SearchTransactionGroupItemVM" />
+
+        <import type="co.yap.yapcore.helpers.extentions.TransactionExtentionsKt" />
+
+        <import type="co.yap.translation.Strings" />
+    </data>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:background="@color/white"
+        android:paddingStart="@dimen/margin_normal"
+        android:paddingTop="@dimen/margin_small"
+        android:paddingEnd="@dimen/margin_normal"
+        android:paddingBottom="@dimen/margin_small">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvTransactionDate"
+            style="@style/Yap.App.Widget.TextView.Label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="@{TransactionExtentionsKt.getFormattedDate(homeTransactionGroupItemVM.item.transaction[0])}"
+            tools:text="Today, Sep 03" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            style="@style/Yap.App.Widget.TextView.Label"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="@{TransactionExtentionsKt.getTotalAmount(homeTransactionGroupItemVM.item.transaction)}"
+            tools:text="+ 667.21" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</layout>
