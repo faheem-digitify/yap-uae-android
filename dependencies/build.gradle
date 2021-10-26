@@ -5,6 +5,7 @@ apply plugin: 'androidx.navigation.safeargs.kotlin'
 //apply {
 //    from "../yapuae/uploadLibrary.gradle"
 //}
+group = "com.github.faheem-digitify"
 project.ext {
     compileSdkVersion = 29
     minSdkVersion = 23
